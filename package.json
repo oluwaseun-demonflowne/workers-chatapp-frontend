@@ -1,0 +1,50 @@
+{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@emoji-mart/data": "^1.2.1",
+    "@emoji-mart/react": "^1.1.1",
+    "@types/nodemailer": "^6.4.15",
+    "@typescript-eslint/eslint-plugin": "^7.13.0",
+    "@uploadthing/react": "^6.6.0",
+    "cookie": "^0.6.0",
+    "cookies-next": "^4.2.1",
+    "emoji-mart": "^5.6.0",
+    "framer-motion": "^11.2.10",
+    "jose": "^5.3.0",
+    "jsonwebtoken": "^9.0.2",
+    "next": "14.2.3",
+    "next-client-cookies": "^1.1.1",
+    "next-themes": "^0.3.0",
+    "nodemailer": "^6.9.13",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-hot-toast": "^2.4.1",
+    "react-icons": "^5.2.1",
+    "react-nice-avatar": "^1.5.0",
+    "react-photo-view": "^1.2.6",
+    "socket.io-client": "^4.7.5",
+    "universal-cookie": "^7.1.4",
+    "uploadthing": "^6.12.0",
+    "zustand": "^4.5.2"
+  },
+  "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.6",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@typescript-eslint/parser": "^7.13.0",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.3",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  }
+}
