@@ -1,6 +1,6 @@
 export default function Layout({
   chat,
-  list,
+  list
 }: {
   chat: React.ReactNode;
   list: React.ReactNode;

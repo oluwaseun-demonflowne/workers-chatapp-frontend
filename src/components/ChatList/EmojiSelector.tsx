@@ -4,7 +4,7 @@ import React, {
   type Dispatch,
   type SetStateAction,
   type MutableRefObject,
-  useRef,
+  useRef
 } from "react";
 import { motion } from "framer-motion";
 
@@ -23,11 +23,11 @@ const mobileVariants = {
       duration: 0.4,
       type: "spring",
       stiffness: 200,
-      damping: 23,
+      damping: 23
     },
-    y: 0,
+    y: 0
   },
-  closed: { opacity: 0, transition: { duration: 0.4 }, y: "700px", height: 0 },
+  closed: { opacity: 0, transition: { duration: 0.4 }, y: "700px", height: 0 }
 };
 
 export default function EmojiSelector(props: Props) {
@@ -61,15 +61,13 @@ export default function EmojiSelector(props: Props) {
     <motion.div
       animate={isOpen ? "open" : "closed"}
       variants={mobileVariants}
-      className=""
-    >
+      className="">
       {/* <div className="">{displayEmoji}</div> */}
       <div
         ref={emojiRef}
         className={` ${
           isOpen ? "h-40" : "h-0"
-        } mt-3 remove-overflow overflow-y-scroll`}
-      >
+        } mt-3 remove-overflow overflow-y-scroll`}>
         {emojis.map((emoji, index) => (
           <button
             type="button"
@@ -77,8 +75,7 @@ export default function EmojiSelector(props: Props) {
             className="text-2xl"
             onClick={() => {
               handleClick(emoji);
-            }}
-          >
+            }}>
             {emoji}
           </button>
         ))}

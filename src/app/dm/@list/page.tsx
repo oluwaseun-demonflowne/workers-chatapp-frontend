@@ -1,9 +1,7 @@
 "use client";
 import ListEmail from "@/components/List/ListEmail";
 import SearchBar from "@/components/List/SearchBar";
-import { useSocket } from "@/providers/Socket";
 import { useChat, useEmailState } from "@/store";
-import { names } from "@/templates/chat";
 import { type Chat } from "@/types/chatType";
 import { type ListName, type ListNameType } from "@/types/listTypes";
 import React, { type FC, Suspense, useEffect, useState } from "react";
@@ -11,25 +9,21 @@ import React, { type FC, Suspense, useEffect, useState } from "react";
 const List: FC<Record<string, never>> = () => {
   const [listName, setListName] = useState<ListName[]>([]);
   const { chats } = useChat();
-  const {socket} = useSocket()
   const { senderEmail } = useEmailState();
 
   const handleData = (names: Chat[]) => {
     const emailMap: ListNameType = {};
-
-    console.log("e dey work")
-
     names.forEach((item) => {
       if (item.receiverEmail !== senderEmail) {
-        console.log(item.message)
+        console.log(item.message);
         if (emailMap[item.receiverEmail]) {
           emailMap[item.receiverEmail].message = item.message;
         } else
           [
             (emailMap[item.receiverEmail] = {
               email: item.receiverEmail,
-              message: item.message,
-            }),
+              message: item.message
+            })
           ];
       }
     });
@@ -39,6 +33,7 @@ const List: FC<Record<string, never>> = () => {
 
   useEffect(() => {
     handleData(chats);
+    console.log(senderEmail);
     // handleData(names);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [senderEmail, chats]);

@@ -7,10 +7,10 @@ import React, {
   type Dispatch,
   type SetStateAction,
   useRef,
-  useState,
+  useState
 } from "react";
 import { AiOutlineRedo } from "react-icons/ai";
-import { Online } from "../List/ListEmail";
+import { type Online } from "../List/ListEmail";
 
 type Props = {
   openVerifyModel: boolean;
@@ -25,17 +25,17 @@ const mobileVariants = {
       duration: 0.4,
       type: "spring",
       stiffness: 200,
-      damping: 15,
+      damping: 15
     },
-    y: 0,
+    y: 0
   },
-  closed: { opacity: 0, transition: { duration: 0.4 }, y: "-700px" },
+  closed: { opacity: 0, transition: { duration: 0.4 }, y: "-700px" }
 };
 
 const VerifyEmail = ({
   openVerifyModel,
   chatter,
-  setOpenVerifyModel,
+  setOpenVerifyModel
 }: Props) => {
   const { push } = useRouter();
   const { socket } = useSocket();
@@ -73,13 +73,11 @@ const VerifyEmail = ({
     <motion.div
       className={`top-0 ${
         openVerifyModel ? "z-10 " : "z-[-4] opacity-0"
-      }  right-0 flex justify-center h-screen w-[100%] absolute`}
-    >
+      }  right-0 flex justify-center h-screen w-[100%] absolute`}>
       <motion.div
         animate={openVerifyModel ? "open" : "closed"}
         variants={mobileVariants}
-        className="bg-white dark:bg-[#202020] mt-5 rounded-2xl shadow-xl h-fit overflow-hidden w-[450px] text-center flex flex-col  justify-between"
-      >
+        className="bg-white dark:bg-[#202020] mt-5 rounded-2xl shadow-xl h-fit overflow-hidden w-[450px] text-center flex flex-col  justify-between">
         <form
           onSubmit={async (e) => {
             e.preventDefault();
@@ -88,9 +86,9 @@ const VerifyEmail = ({
               const response = await fetch("/api/VerifyToken", {
                 method: "POST",
                 body: JSON.stringify({
-                  email: chatter,
+                  email: chatter
                 }),
-                headers: { otpToken: codes.join("") },
+                headers: { otpToken: codes.join("") }
               });
               if (response.status === 200) {
                 socket?.emit("new-online", chatter);
@@ -109,7 +107,7 @@ const VerifyEmail = ({
                 // incorrect key , please retry
                 setError({
                   error: true,
-                  errorMsg: "incorrect key , please retry",
+                  errorMsg: "incorrect key , please retry"
                 });
                 setLoading(false);
               }
@@ -117,7 +115,7 @@ const VerifyEmail = ({
                 setDisableInput(true);
                 setError({
                   error: true,
-                  errorMsg: "Token expired, please request new token",
+                  errorMsg: "Token expired, please request new token"
                 });
                 setLoading(false);
               }
@@ -129,8 +127,7 @@ const VerifyEmail = ({
               setLoading(false);
             }
           }}
-          className="mt-6 "
-        >
+          className="mt-6 ">
           <p className="text-[22px] dark:text-[#d7dadc] text-gray-600 font-medium">
             Verify your email address to start conversations.
           </p>
@@ -178,8 +175,7 @@ const VerifyEmail = ({
               disabled={loading}
               className={`text-[13px] text-[#304fff] ${
                 loading ? "opacity-30" : ""
-              } text-center mt-5 font-light`}
-            >
+              } text-center mt-5 font-light`}>
               Didn&apos;t get a code? Request new code
               {/* <span className="text-[#304fff]"></span> */}
             </button>
@@ -195,8 +191,7 @@ const VerifyEmail = ({
                 whileHover="hover"
                 className={`px-4 ${
                   loading ? "opacity-30" : ""
-                } flex gap-1 dark:border-slate-500 items-center text-center py-2 text-[#304fff] border border-slate-300  rounded-md font-light  text-[14px] bg-white`}
-              >
+                } flex gap-1 dark:border-slate-500 items-center text-center py-2 text-[#304fff] border border-slate-300  rounded-md font-light  text-[14px] bg-white`}>
                 <AiOutlineRedo />
                 wrong email?
               </motion.button>
@@ -204,8 +199,7 @@ const VerifyEmail = ({
                 disabled={loading}
                 className={`w-36 button-57 ${
                   loading ? "opacity-30" : ""
-                } py-2 border border-slate-300 dark:border-slate-500 dark:text-[#d7dadc]  rounded-md font-light text-[#304fff] text-[14px] dark:bg-slate-600 bg-white`}
-              >
+                } py-2 border border-slate-300 dark:border-slate-500 dark:text-[#d7dadc]  rounded-md font-light text-[#304fff] text-[14px] dark:bg-slate-600 bg-white`}>
                 <span>Verify</span>
                 <span>Verify</span>
               </button>

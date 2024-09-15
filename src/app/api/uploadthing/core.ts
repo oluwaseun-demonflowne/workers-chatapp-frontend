@@ -20,7 +20,7 @@ export const ourFileRouter = {
       console.log("file url", file.url);
 
       //   return { uploadedBy: metadata.userId };
-    }),
+    })
 } satisfies FileRouter;
 
 export type OurFileRouter = typeof ourFileRouter;

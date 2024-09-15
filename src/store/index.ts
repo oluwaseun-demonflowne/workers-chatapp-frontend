@@ -13,13 +13,13 @@ type ChatStore = {
   chats: Chat[];
   tempChat: Chat[];
 };
-type TextList = {
-  list: ListName[];
-};
+// type TextList = {
+//   list: ListName[];
+// };
 
-type TextListAction = {
-  setList: (list: ListName) => void;
-};
+// type TextListAction = {
+//   setList: (list: ListName) => void;
+// };
 
 type ChatStoreAction = {
   setChats: (chat: Chat) => void;
@@ -44,7 +44,7 @@ export const useEmailState = create<EmailStates & Action>((set) => ({
   senderEmail: "",
   email: "",
   setEmail: (emails) => set(() => ({ email: emails })),
-  setSenderEmail: (emails) => set(() => ({ senderEmail: emails })),
+  setSenderEmail: (emails) => set(() => ({ senderEmail: emails }))
 }));
 export const useChat = create<ChatStore & ChatStoreAction>((set) => ({
   chats: [],
@@ -61,15 +61,15 @@ export const useChat = create<ChatStore & ChatStoreAction>((set) => ({
         } else {
           return { ...i };
         }
-      }),
-    })),
+      })
+    }))
 }));
 
 export const useSocketStateZustand = create<SocketState & SocketStateAction>(
   (set) => ({
     getOnlineUsers: [],
     setGetOnlineUsers: (onlineUsers) =>
-      set(() => ({ getOnlineUsers: onlineUsers })),
+      set(() => ({ getOnlineUsers: onlineUsers }))
   })
 );
 

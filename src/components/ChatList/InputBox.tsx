@@ -22,7 +22,7 @@ const InputBox = () => {
 
   // console.log(arrayImages);
 
-  const submitInput = (e: FormEvent) => {
+  const submitInput = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     socket?.emit("sentMessage", {
       chatId: Math.floor(Math.random() * 1000000),
@@ -30,7 +30,7 @@ const InputBox = () => {
       senderEmail: senderEmail,
       receiverEmail: email,
       image: arrayImages,
-      status: "sent",
+      status: "sent"
       // date: "Today 7:45 am",
       // picture: session?.user?.image,
     });
@@ -79,8 +79,7 @@ const InputBox = () => {
             onClick={() => {
               setIsOpen((prev) => !prev);
             }}
-            className="cursor-pointer"
-          >
+            className="cursor-pointer">
             {displayEmoji}
           </button>
           <ImageChat
@@ -95,8 +94,7 @@ const InputBox = () => {
           <button
             className={`${
               text.length < 1 ? "pointer-events-none opacity-30" : ""
-            }`}
-          >
+            }`}>
             <MdSend className="text-2xl text-slate-600" />
           </button>
         </div>

@@ -49,16 +49,14 @@ const ImageChat = ({ setArrayImages, arrayImages }: Props) => {
       {!loading && (
         <label
           className="text-base cursor-pointer font-semibold rounded-md  justify-center px-3 py-2  text-[#73adff] z-10 flex items-center gap-1"
-          htmlFor="upload"
-        >
+          htmlFor="upload">
           <MdOutlineBrowseGallery className="text-2xl text-slate-600" />
         </label>
       )}
       {loading && (
         <label
           className="text-xs pointer-events-none opacity-10 cursor-pointer font-semibold rounded-md  z-10 justify-center px-3 py-2 text-[#73adff] flex items-center gap-1"
-          htmlFor="upload"
-        >
+          htmlFor="upload">
           <MdOutlineBrowseGallery className="text-2xl text-slate-600" />
         </label>
       )}

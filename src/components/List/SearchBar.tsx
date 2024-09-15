@@ -1,5 +1,5 @@
 import { useChat, useEmailState } from "@/store";
-import { Chat } from "@/types/chatType";
+import { type Chat } from "@/types/chatType";
 import React, { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { MdSms } from "react-icons/md";
@@ -12,8 +12,6 @@ import { MdSms } from "react-icons/md";
 //   image: string[];
 //   status: "sent" | "read" | "delivered";
 // };
-
-
 
 // socket?.emit("sentMessage", {
 //   chatId: Math.floor(Math.random() * 1000000),
@@ -34,7 +32,7 @@ const SearchBar = () => {
     chatId: Math.floor(Math.random() * 1000000),
     message: "",
     image: [],
-    status: "read",
+    status: "read"
   });
 
   const addEmail = (e: React.FormEvent<HTMLFormElement>) => {
@@ -45,8 +43,7 @@ const SearchBar = () => {
   return (
     <form
       onSubmit={addEmail}
-      className="relative flex justify-between items-center"
-    >
+      className="relative flex justify-between items-center">
       <input
         required
         value={searchEmail.receiverEmail}
@@ -54,7 +51,7 @@ const SearchBar = () => {
           setSearchEmail((prev) => ({
             ...prev,
             senderEmail: senderEmail,
-            receiverEmail: e.target.value,
+            receiverEmail: e.target.value
           }));
         }}
         placeholder="search"

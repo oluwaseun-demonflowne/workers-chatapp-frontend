@@ -8,17 +8,17 @@ export const POST = async (req: Request, _res: Response) => {
 
   const SIX_DIGIT_OTP = Math.floor(Math.random() * 1000000)
     .toString()
-    .substring(0, 6);
+    .padStart(6, "0");
 
   console.log(SIX_DIGIT_OTP);
 
   const accessToken = sign(
     {
-      OTP: SIX_DIGIT_OTP,
+      OTP: SIX_DIGIT_OTP
     },
     process.env.OTP_TOKEN!,
     {
-      expiresIn: "30s",
+      expiresIn: "30s"
     }
   );
 
@@ -27,33 +27,33 @@ export const POST = async (req: Request, _res: Response) => {
     secure: process.env.NODE_ENV === "production",
     sameSite: "strict",
     maxAge: 30,
-    path: "/",
+    path: "/"
   });
 
   const transport = nodemailer.createTransport({
     service: "gmail",
     auth: {
       user: process.env.NODEMAILER_EMAIL,
-      pass: process.env.NODEMAILER_PASSWORD,
-    },
+      pass: process.env.NODEMAILER_PASSWORD
+    }
   });
 
   const mailOptions: Mail.Options = {
     from: process.env.NODEMAILER_EMAIL,
     to: email,
     subject: "Verification code",
-    text: SIX_DIGIT_OTP,
+    text: SIX_DIGIT_OTP
   };
 
   try {
     await transport.sendMail(mailOptions);
     return new Response(JSON.stringify("success"), {
-      status: 200,
+      status: 200
     });
   } catch (error) {
     console.log(error);
     return new Response(JSON.stringify("error"), {
-      status: 500,
+      status: 500
     });
   }
 };

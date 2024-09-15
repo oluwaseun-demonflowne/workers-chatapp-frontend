@@ -17,7 +17,7 @@ const FormEmail = ({
   openVerifyModel,
   setOpenVerifyModal,
   setChatter,
-  chatter,
+  chatter
 }: Props) => {
   const [loading, setLoading] = useState(false);
   const { setSenderEmail } = useEmailState();
@@ -37,24 +37,23 @@ const FormEmail = ({
 
         //
         //
-        const response = await fetch("/api/fakeCookie", {
-          body: JSON.stringify({ email: chatter }),
-          method: "POST",
-        });
-        if (response.status === 200) {
-          setSenderEmail(chatter);
-          socket?.emit("new-online", chatter);
-          push("/dm");
-        }
+        // const response = await fetch("/api/fakeCookie", {
+        //   body: JSON.stringify({ email: chatter }),
+        //   method: "POST"
+        // });
+        // if (response.status === 200) {
+        //   setSenderEmail(chatter);
+        //   socket?.emit("new-online", chatter);
+        //   push("/dm");
+        // }
         //
         //
 
-        // setOpenVerifyModal(true)
+        setOpenVerifyModal(true)
 
-        // await getCode(setLoading, chatter, setOpenVerifyModal);
-        // setLoading(false);
-      }}
-    >
+        await getCode(setLoading, chatter, setOpenVerifyModal);
+        setLoading(false);
+      }}>
       <div className="flex flex-col gap-6 px-4 md:px-24 mt-20 text-center items-center h-[300px]">
         <h1 className="text-2xl dark:text-[#007aff] font-bold text-slate-500">
           Sign in to Message your Family & Friends
@@ -81,8 +80,7 @@ const FormEmail = ({
           // transition={{ duration: 0.4 }}
           className={`w-40 button-57 text ${
             loading ? "opacity-30" : ""
-          }  py-4 border border-slate-300  rounded-md font-light dark:border-slate-500 dark:text-[#d7dadc] text-slate-600 text-[14px] bg-white dark:bg-slate-600`}
-        >
+          }  py-4 border border-slate-300  rounded-md font-light dark:border-slate-500 dark:text-[#d7dadc] text-slate-600 text-[14px] bg-white dark:bg-slate-600`}>
           <span>Verify</span>
           <span>Verify</span>
         </button>

@@ -11,7 +11,7 @@ type SocketContextType = {
 
 const SocketContext = createContext<SocketContextType>({
   socket: null,
-  isConnected: false,
+  isConnected: false
 });
 
 export const useSocket = () => {
@@ -22,7 +22,7 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
   const { senderEmail } = useEmailState();
   const [socket, setSocket] = useState<Socket | null>(null);
   const [isConnected, setIsConnected] = useState(false);
-  const { getOnlineUsers, setGetOnlineUsers } = useSocketStateZustand();
+  const { setGetOnlineUsers } = useSocketStateZustand();
 
   useEffect(() => {
     const socket: Socket = io("http://localhost:5001");
@@ -33,8 +33,8 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
 
     if (senderEmail !== "") {
       socket.emit("new-online", senderEmail);
+
       socket.emit("get-users", senderEmail);
-      console.log(getOnlineUsers);
     }
     socket?.on("get-users", (user: Online[]) => {
       setGetOnlineUsers(user);

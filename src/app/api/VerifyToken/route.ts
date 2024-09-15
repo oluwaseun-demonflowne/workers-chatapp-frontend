@@ -6,17 +6,17 @@ type payloadType = {
   OTP: number;
   iat: number;
   exp: number;
-}
+};
 
 export const POST = async (req: Request, _res: Response) => {
   const { email } = await req.json();
   const accessToken = sign(
     {
-      email: email,
+      email: email
     },
     process.env.ACCESS_TOKEN!,
     {
-      expiresIn: "2h",
+      expiresIn: "2h"
     }
   );
   const authHeader = req.headers;
@@ -24,7 +24,7 @@ export const POST = async (req: Request, _res: Response) => {
   if (!authHeader)
     //  no header , i do not know how this is possible lol but just put there incase
     return new Response(JSON.stringify("No token sent"), {
-      status: 401,
+      status: 401
     });
 
   //   console.log(authHeader.get("otpToken"));
@@ -36,7 +36,7 @@ export const POST = async (req: Request, _res: Response) => {
   if (!token) {
     // return no cookie set up please input your email again , maybe token expired
     return new Response(JSON.stringify("Oboy Error"), {
-      status: 402,
+      status: 402
     });
   }
   const { value } = token!;
@@ -53,21 +53,21 @@ export const POST = async (req: Request, _res: Response) => {
         secure: process.env.NODE_ENV === "production",
         sameSite: "strict",
         maxAge: 172800,
-        path: "/",
+        path: "/"
       });
       return new Response(JSON.stringify("SIX_DIGIT_OTP"), {
-        status: 200,
+        status: 200
       });
     }
     //  return incorrect key
     return new Response(JSON.stringify("Incorrect Key"), {
-      status: 401,
+      status: 401
     });
   } catch (error) {
     console.log(error);
     //  unknown error
     return new Response(JSON.stringify("Oboy Error again"), {
-      status: 500,
+      status: 500
     });
   }
 };

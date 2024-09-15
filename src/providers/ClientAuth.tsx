@@ -11,14 +11,14 @@ type payloadType = {
   email: string;
   iat: number;
   exp: number;
-}
+};
 
 type AuthContextType = {
   email: string | null;
 };
 
 const AuthContext = createContext<AuthContextType>({
-  email: null,
+  email: null
 });
 
 export const useAuthHere = () => {
@@ -26,7 +26,7 @@ export const useAuthHere = () => {
 };
 
 export const AuthContextProvider = ({
-  children,
+  children
 }: {
   children: React.ReactNode;
 }) => {
@@ -35,7 +35,7 @@ export const AuthContextProvider = ({
   const [email, setEmail] = useState<string | null>("");
 
   //   const KnowIfEmailExists = await useAuth();
-  const { setSenderEmail } = useEmailState();
+  const { setSenderEmail, senderEmail } = useEmailState();
   const cookieStore = new Cookies();
   const token = cookieStore.get("chat-auth");
   // console.log(token);
@@ -51,11 +51,10 @@ export const AuthContextProvider = ({
     try {
       const payload: JWTVerifyResult<payloadType> = await jwtVerify(
         token,
-        new TextEncoder().encode(process.env.KEY)
-        // new TextEncoder().encode("14f7caeb710d535c6d334390db7862e3")
+        new TextEncoder().encode("14f7caeb710d535c6d334390db7862e3")
       );
-      // console.log(payload.payload.email);
-      setEmail(payload.payload.email);
+      console.log(payload.payload.email);
+      setSenderEmail(payload.payload.email);
       return payload.payload.email;
     } catch (error) {
       console.log(error);
@@ -64,23 +63,18 @@ export const AuthContextProvider = ({
     }
   };
 
-  // console.log(email);
+  console.log(email, "nothing");
 
   useEffect(() => {
-    Auth();
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    if (email === null) {
-      if (pathname === "/dm") {
+    const startAuth = async () => {
+      await Auth();
+      if (email === null && pathname === "/dm") {
         push("/login");
       }
-    }
-    if (email !== null) {
-      // console.log("how e beee");
-      setSenderEmail(email);
-    }
+    };
+    startAuth();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname, email]);
+  }, [senderEmail]);
 
   return (
     <AuthContext.Provider value={{ email }}>{children}</AuthContext.Provider>

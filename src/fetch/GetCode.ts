@@ -9,11 +9,11 @@ export const getCode = async (
   try {
     const response = await fetch("/api/OtpEmail", {
       body: JSON.stringify({ email: chatter }),
-      method: "POST",
+      method: "POST"
     });
     if (response.status === 200) {
       setOpenVerifyModal && setOpenVerifyModal(true);
-    //   setLoading(false);
+      //   setLoading(false);
     }
     if (response.status === 500) {
       setLoading(false);

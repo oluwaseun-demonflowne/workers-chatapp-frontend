@@ -12,13 +12,13 @@ export const useChatImage = () => {
     onUploadError: () => {
       toast.error("Error Updating file, ReUpload");
       setLoading(false);
-    },
+    }
   });
 
   return {
     loading,
     // linkUrl,
     setLoading,
-    startUpload,
+    startUpload
   };
 };

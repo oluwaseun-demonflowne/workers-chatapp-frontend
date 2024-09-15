@@ -1,8 +1,8 @@
 "use client";
-import { ListName } from "@/app/dm/@list/page";
 import { useSocket } from "@/providers/Socket";
 import { useEmailState, useSocketStateZustand } from "@/store";
-import React, { useEffect} from "react";
+import { type ListName } from "@/types/listTypes";
+import React, { useEffect } from "react";
 import Avatar, { genConfig } from "react-nice-avatar";
 
 type Props = {
@@ -28,7 +28,6 @@ const ListEmail = ({ list }: Props) => {
       setGetOnlineUsers(user);
     });
 
-
     return () => {
       socket?.off("get-users");
     };
@@ -40,9 +39,10 @@ const ListEmail = ({ list }: Props) => {
       {list.map((i, index) => (
         <div
           key={index}
-          onClick={() => setEmail(i.email)}
-          className="py-4 px-2  cursor-pointer hover:bg-[#e3dfdf] dark:hover:bg-slate-600  rounded-lg flex items-center gap-3"
-        >
+          onClick={() => {
+            setEmail(i.email);
+          }}
+          className="py-4 px-2  cursor-pointer hover:bg-[#e3dfdf] dark:hover:bg-slate-600  rounded-lg flex items-center gap-3">
           <Avatar
             key={i.email}
             style={{ width: "2rem", height: "2rem" }}
@@ -56,8 +56,7 @@ const ListEmail = ({ list }: Props) => {
               ) ? (
                 <span
                   key={index}
-                  className=" p-1 h-fit mt-2 bg-green-700 rounded-[50%] text-green-700"
-                ></span>
+                  className=" p-1 h-fit mt-2 bg-green-700 rounded-[50%] text-green-700"></span>
               ) : null}
             </p>
             <p className="text-[14px] text-slate-500 font-light">

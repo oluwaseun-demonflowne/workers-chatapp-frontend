@@ -7,10 +7,9 @@ type payloadType = {
   email: number;
   iat: number;
   exp: number;
-}
+};
 
 export async function middleware(request: NextRequest) {
-  // console.log(request.nextUrl.pathname);
   if (request.nextUrl.pathname.startsWith("/dm")) {
     const cookieStore = cookies();
     const token = cookieStore.get("chat-auth");
@@ -48,6 +47,6 @@ export async function middleware(request: NextRequest) {
   return;
 }
 
-export const config = {
-  matcher: ["/dm", "/login"],
-};
+// export const config = {
+//   matcher: ["/dm", "/login"],
+// };

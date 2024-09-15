@@ -8,14 +8,12 @@ import { useChat, useEmailState } from "@/store";
 import { type Data } from "@/types/chatType";
 import React, { type FC, useEffect } from "react";
 
-
-
 const Chat: FC<Record<string, never>> = () => {
   const { email, senderEmail, setEmail } = useEmailState((state) => state);
   const { chats, setChats, filteredChat, resetChat, tempChat } = useChat();
   const { socket } = useSocket();
 
-  console.log(chats);
+  console.log(senderEmail);
 
   useEffect(() => {
     socket?.on("sentMessageFromServer", (data: Data) => {
