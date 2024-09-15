@@ -1,10 +1,10 @@
 import { getCode } from "@/fetch/GetCode";
-import { useSocket } from "@/providers/Socket";
-import { useEmailState, useSocketStateZustand } from "@/store";
-import { useRouter } from "next/navigation";
+// import { useSocket } from "@/providers/Socket";
+// import { useEmailState, useSocketStateZustand } from "@/store";
+// import { useRouter } from "next/navigation";
 import React, { type Dispatch, type SetStateAction, useState } from "react";
 
-import { Online } from "../List/ListEmail";
+// import { Online } from "../List/ListEmail";
 
 type Props = {
   openVerifyModel: boolean;
@@ -20,11 +20,11 @@ const FormEmail = ({
   chatter
 }: Props) => {
   const [loading, setLoading] = useState(false);
-  const { setSenderEmail } = useEmailState();
-  const { push } = useRouter();
+  // const { setSenderEmail } = useEmailState();
+  // const { push } = useRouter();
 
-  const { socket } = useSocket();
-  const { setGetOnlineUsers } = useSocketStateZustand();
+  // const { socket } = useSocket();
+  // const { setGetOnlineUsers } = useSocketStateZustand();
 
   return (
     <form
@@ -49,7 +49,7 @@ const FormEmail = ({
         //
         //
 
-        setOpenVerifyModal(true)
+        setOpenVerifyModal(true);
 
         await getCode(setLoading, chatter, setOpenVerifyModal);
         setLoading(false);
@@ -66,7 +66,9 @@ const FormEmail = ({
         <input
           required
           value={chatter}
-          onChange={(e) => setChatter(e.currentTarget.value)}
+          onChange={(e) => {
+            setChatter(e.currentTarget.value);
+          }}
           placeholder="Email Address"
           className="bg-[#e3dfdf] text-slate-600 rounded-md  border dark:border-slate-400 p-2 text-[15px] dark:bg-slate-600 dark:text-[#d7dadc] w-72 outline-none "
           type="email"

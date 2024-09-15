@@ -2,7 +2,6 @@
 
 import { type Online } from "@/components/List/ListEmail";
 import { type Chat } from "@/types/chatType";
-import { type ListName } from "@/types/listTypes";
 import { create } from "zustand";
 
 type EmailStates = {

@@ -11,9 +11,15 @@ const List: FC<Record<string, never>> = () => {
   const { chats } = useChat();
   const { senderEmail } = useEmailState();
 
+  console.log(chats);
+
   const handleData = (names: Chat[]) => {
+    console.log(chats);
+    console.log("is this actually working");
     const emailMap: ListNameType = {};
+
     names.forEach((item) => {
+      console.log(item.receiverEmail, senderEmail);
       if (item.receiverEmail !== senderEmail) {
         console.log(item.message);
         if (emailMap[item.receiverEmail]) {
@@ -25,11 +31,24 @@ const List: FC<Record<string, never>> = () => {
               message: item.message
             })
           ];
+      } else {
+        if (emailMap[item.senderEmail]) {
+          emailMap[item.senderEmail].message = item.message;
+        } else
+          [
+            (emailMap[item.senderEmail] = {
+              email: item.senderEmail,
+              message: item.message
+            })
+          ];
       }
     });
     const unique = Object.values(emailMap) as ListName[];
     setListName(unique);
+    console.log(unique);
   };
+
+  console.log(listName);
 
   useEffect(() => {
     handleData(chats);
