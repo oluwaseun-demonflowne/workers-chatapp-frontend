@@ -24,8 +24,10 @@ export default function RootLayout({
         <SocketProvider>
           <AuthContextProvider>
             <TheProviders>
-              <ThemeSwitch />
-              {children}
+             <main className=" justify-between items-center">
+                {children}
+                <ThemeSwitch />                
+             </main>
             </TheProviders>
           </AuthContextProvider>
         </SocketProvider>

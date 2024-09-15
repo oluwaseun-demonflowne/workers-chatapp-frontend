@@ -1,6 +1,8 @@
+import NavBar from "@/components/landing-page/NavBar";
+
 export default function Home() {
   return (
-  <div>
-    Hello World!
-  </div>);
+  <section className="">
+    <NavBar />
+  </section>);
 }

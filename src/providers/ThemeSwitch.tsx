@@ -25,7 +25,7 @@ export default function ThemeSwitch() {
 
   if (resolvedTheme === "dark") {
     return (
-      <div className="absolute  z-[99] p-4">
+      <div className="absolute z-[99] p-4 right-0">
         <FiSun
           className="text-2xl cursor-pointer"
           onClick={() => {
@@ -38,7 +38,7 @@ export default function ThemeSwitch() {
 
   if (resolvedTheme === "light") {
     return (
-      <div className="absolute  z-[99] p-4">
+      <div className="absolute z-[99] p-4 right-3">
         <FiMoon
           className="text-2xl z-[99] cursor-pointer"
           onClick={() => {
