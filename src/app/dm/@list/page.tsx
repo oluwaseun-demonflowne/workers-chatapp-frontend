@@ -11,8 +11,6 @@ const List: FC<Record<string, never>> = () => {
   const { chats } = useChat();
   const { senderEmail } = useEmailState();
 
-  
-
   const handleData = (names: Chat[]) => {
     const emailMap: ListNameType = {};
 
@@ -42,7 +40,6 @@ const List: FC<Record<string, never>> = () => {
     setListName(unique);
     console.log(unique);
   };
-
 
   useEffect(() => {
     handleData(chats);

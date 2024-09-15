@@ -47,7 +47,6 @@ export const useEmailState = create<EmailStates & Action>((set) => ({
   setSenderEmail: (emails) => set(() => ({ senderEmail: emails }))
 }));
 
-
 export const useChat = create(
   persist<ChatStore & ChatStoreAction>(
     (set) => ({
