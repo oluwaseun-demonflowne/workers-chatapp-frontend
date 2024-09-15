@@ -25,6 +25,7 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
   const { setGetOnlineUsers } = useSocketStateZustand();
 
   useEffect(() => {
+    // https://workers-chatapp-backend.onrender.com/
     const socket: Socket = io("http://localhost:5001");
 
     socket.on("connect", () => {

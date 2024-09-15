@@ -11,36 +11,31 @@ const List: FC<Record<string, never>> = () => {
   const { chats } = useChat();
   const { senderEmail } = useEmailState();
 
-  console.log(chats);
+  
 
   const handleData = (names: Chat[]) => {
-    console.log(chats);
-    console.log("is this actually working");
     const emailMap: ListNameType = {};
 
     names.forEach((item) => {
-      console.log(item.receiverEmail, senderEmail);
-      if (item.receiverEmail !== senderEmail) {
-        console.log(item.message);
-        if (emailMap[item.receiverEmail]) {
-          emailMap[item.receiverEmail].message = item.message;
-        } else
-          [
-            (emailMap[item.receiverEmail] = {
-              email: item.receiverEmail,
-              message: item.message
-            })
-          ];
+      const otherEmail =
+        item.receiverEmail !== senderEmail
+          ? item.receiverEmail
+          : item.senderEmail;
+
+      if (emailMap[otherEmail]) {
+        // Update existing entry
+        emailMap[otherEmail].message = item.message;
+        emailMap[otherEmail].status =
+          item.status ?? emailMap[otherEmail].status;
+        emailMap[otherEmail].senderEmail = item.senderEmail;
       } else {
-        if (emailMap[item.senderEmail]) {
-          emailMap[item.senderEmail].message = item.message;
-        } else
-          [
-            (emailMap[item.senderEmail] = {
-              email: item.senderEmail,
-              message: item.message
-            })
-          ];
+        // Create new entry
+        emailMap[otherEmail] = {
+          email: otherEmail,
+          message: item.message,
+          status: item.status ?? "unknown", // Provide a default value if status is undefined
+          senderEmail: item.senderEmail
+        };
       }
     });
     const unique = Object.values(emailMap) as ListName[];
@@ -48,13 +43,9 @@ const List: FC<Record<string, never>> = () => {
     console.log(unique);
   };
 
-  console.log(listName);
 
   useEffect(() => {
     handleData(chats);
-    console.log(senderEmail);
-    // handleData(names);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [senderEmail, chats]);
 
   return (

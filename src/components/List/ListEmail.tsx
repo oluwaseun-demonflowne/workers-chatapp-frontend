@@ -3,6 +3,7 @@ import { useSocket } from "@/providers/Socket";
 import { useEmailState, useSocketStateZustand } from "@/store";
 import { type ListName } from "@/types/listTypes";
 import React, { useEffect } from "react";
+import { MdCheck, MdMarkEmailRead, MdMarkEmailUnread } from "react-icons/md";
 import Avatar, { genConfig } from "react-nice-avatar";
 
 type Props = {
@@ -50,7 +51,7 @@ const ListEmail = ({ list }: Props) => {
           />
           <div className="w-full">
             <p className="text-[15px] flex justify-between  w-[100%] dark:text-[#d7dadc] font-semibold">
-              {i.email}
+              {i.email.length > 15 ? `${i.email.substring(0, 15)}...` : i.email}
               {getOnlineUsers.some(
                 (onlineUser) => onlineUser.email === i.email
               ) ? (
@@ -59,7 +60,7 @@ const ListEmail = ({ list }: Props) => {
                   className=" p-1 h-fit mt-2 bg-green-700 rounded-[50%] text-green-700"></span>
               ) : null}
             </p>
-            <p className="text-[14px] text-slate-500 font-light">
+            <div className="text-[14px] text-slate-500 font-bold">
               {getOnlineUsers.some(
                 (onlineUser) =>
                   onlineUser.email === i.email && onlineUser.typing === true
@@ -67,10 +68,50 @@ const ListEmail = ({ list }: Props) => {
                 <span key={index} className="animate-ping italic">
                   typing...
                 </span>
+              ) : // {i.status == "delivered" && <MdCheck className="" />}
+              // {i.status == "delivered" && <MdCheck className="mt-[-12px] " />}
+              // {i.status == "read" && <MdCheck className="text-[#007aff]" />}
+              // {i.status == "read" && (
+              //   <MdCheck className="mt-[-12px] text-[#007aff]" />
+              // )}
+              i.status === "read" ? (
+                <div className="flex gap-1 items-center">
+                  <MdMarkEmailRead
+                    className={`text-blue-500 ${
+                      i.senderEmail === senderEmail ? "hidden" : "block"
+                    } text-base`}
+                  />
+                  <p className="flex items-center">
+                    <span
+                      className={`${
+                        i.senderEmail !== senderEmail ? "hidden" : "block"
+                      }`}>
+                      <MdCheck className="text-[#007aff] text-base" />
+                      <MdCheck className="mt-[-12px] text-[#007aff] text-base" />
+                    </span>
+                    {i.message}
+                  </p>
+                </div>
               ) : (
-                i.message
+                <div className="flex gap-1 items-center">
+                  <MdMarkEmailUnread
+                    className={`text-red-600 ${
+                      i.senderEmail === senderEmail ? "hidden" : "block"
+                    } text-base`}
+                  />
+                  <p className="flex items-center">
+                    <span
+                      className={`${
+                        i.senderEmail !== senderEmail ? "hidden" : "block"
+                      }`}>
+                      <MdCheck className="text-base" />
+                      <MdCheck className="mt-[-12px] text-base" />
+                    </span>
+                    {i.message}
+                  </p>
+                </div>
               )}
-            </p>
+            </div>
           </div>
         </div>
       ))}
