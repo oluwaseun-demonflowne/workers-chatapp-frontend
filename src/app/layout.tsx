@@ -19,14 +19,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className="scroll-smooth">
+      <head>
+        <title>ChatterBox - Connect and Chat in Real-Time.</title>
+      </head>
       <body className={inter.className}>
         <SocketProvider>
           <AuthContextProvider>
             <TheProviders>
-             <div className=" justify-between items-center">
-                {children}
+             <div className="relative justify-between items-center">
                 <ThemeSwitch />                
+                {children}
              </div>
             </TheProviders>
           </AuthContextProvider>
