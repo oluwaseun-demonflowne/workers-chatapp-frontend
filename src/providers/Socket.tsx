@@ -26,7 +26,7 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     // https://workers-chatapp-backend.onrender.com/
-    const socket: Socket = io("https://workers-chatapp-backend.onrender.com");
+    const socket: Socket = io(process.env.BACKEND_LINK!);
 
     socket.on("connect", () => {
       setIsConnected(true);
