@@ -6,6 +6,7 @@ export const getCode = async (
   setOpenVerifyModal?: Dispatch<SetStateAction<boolean>>
 ) => {
   setLoading(true);
+  
   try {
     const response = await fetch("/api/OtpEmail", {
       body: JSON.stringify({ email: chatter }),
