@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Montserrat } from "next/font/google";
+import {  Oxanium } from "next/font/google";
 import "./globals.css";
 import { SocketProvider } from "@/providers/Socket";
 import { TheProviders } from "@/providers/Theme";
 import ThemeSwitch from "@/providers/ThemeSwitch";
 import { AuthContextProvider } from "@/providers/ClientAuth";
 
-const inter = Montserrat({ subsets: ["latin"] });
+const inter = Oxanium({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
