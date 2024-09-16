@@ -13,7 +13,6 @@ const Chat: FC<Record<string, never>> = () => {
   const { chats, setChats, filteredChat, resetChat, tempChat } = useChat();
   const { socket } = useSocket();
 
-  console.log(senderEmail);
 
   useEffect(() => {
     socket?.on("sentMessageFromServer", (data: Data) => {
