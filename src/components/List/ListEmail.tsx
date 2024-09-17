@@ -37,7 +37,7 @@ const ListEmail = ({ list, openSearch, setOpenSearch }: Props) => {
   }, [senderEmail, getOnlineUsers]);
 
   return (
-    <div className="mt-10 pt-4 md:gap-0 gap-3 md:pt-0 md:mt-5 remove-overflow h-[400px] overflow-y-scroll">
+    <div className="mt-10 pt-4 md:pt-0 md:mt-5 remove-overflow h-[400px] overflow-y-scroll">
       {list.map((i, index) => {
         const config = genConfig(i.email);
         return (
