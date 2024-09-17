@@ -23,7 +23,7 @@ const ListEmail = ({ list, openSearch, setOpenSearch }: Props) => {
   // const [getOnlineUsers, setGetOnlineUsers] = useState<Online[]>([]);
   const { getOnlineUsers, setGetOnlineUsers } = useSocketStateZustand();
   // const [getOnlineUsers, setGetOnlineUsers] = useState<Online[]>([]);
-  const { setEmail, senderEmail, email } = useEmailState();
+  const { setEmail, senderEmail} = useEmailState();
 
   useEffect(() => {
     socket?.on("get-users", (user: Online[]) => {
@@ -142,8 +142,7 @@ const ListEmail = ({ list, openSearch, setOpenSearch }: Props) => {
                 ) : null}
               </p>
               <div className="text-[14px] text-slate-500 font-bold">
-                {i.email === email &&
-                getOnlineUsers.some(
+                {getOnlineUsers.some(
                   (onlineUser) =>
                     onlineUser.email === i.email && onlineUser.typing === true
                 ) ? (
