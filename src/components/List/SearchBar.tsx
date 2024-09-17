@@ -32,12 +32,23 @@ const SearchBar = () => {
     chatId: Math.floor(Math.random() * 1000000),
     message: "",
     image: [],
-    status: "read"
+    status: "sent"
   });
 
   const addEmail = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (senderEmail === searchEmail.receiverEmail) {
+      return;
+    }
     setChats(searchEmail);
+    setSearchEmail({
+      senderEmail: senderEmail,
+      receiverEmail: "",
+      chatId: Math.floor(Math.random() * 1000000),
+      message: "",
+      image: [],
+      status: "sent"
+    });
   };
 
   return (
