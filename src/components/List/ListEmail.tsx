@@ -84,7 +84,7 @@ const ListEmail = ({ list, openSearch, setOpenSearch }: Props) => {
                           <MdCheck className="mt-[-12px] text-[#007aff] text-base" />
                         </span>
                         {/* {i.message.length > 15
-                        ? `${i.message.substring(0, 15)}...`
+                        ? `${i.message.substring(0, 25)}...`
                         : i.message} */}
                       </p>
                     </div>
@@ -170,7 +170,7 @@ const ListEmail = ({ list, openSearch, setOpenSearch }: Props) => {
                         <MdCheck className="mt-[-12px] text-[#007aff] text-base" />
                       </span>
                       {i.message.length > 15
-                        ? `${i.message.substring(0, 15)}...`
+                        ? `${i.message.substring(0, 25)}...`
                         : i.message}
                     </p>
                   </div>
@@ -190,7 +190,7 @@ const ListEmail = ({ list, openSearch, setOpenSearch }: Props) => {
                         <MdCheck className="mt-[-12px] text-base" />
                       </span>
                       {i.message.length > 15
-                        ? `${i.message.substring(0, 15)}...`
+                        ? `${i.message.substring(0, 25)}...`
                         : i.message}
                     </p>
                   </div>
@@ -209,7 +209,7 @@ const ListEmail = ({ list, openSearch, setOpenSearch }: Props) => {
                         <MdCheck className=" text-base" />
                       </span>
                       {i.message.length > 15
-                        ? `${i.message.substring(0, 15)}...`
+                        ? `${i.message.substring(0, 25)}...`
                         : i.message}
                     </p>
                   </div>
