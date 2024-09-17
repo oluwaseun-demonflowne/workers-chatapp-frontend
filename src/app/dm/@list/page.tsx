@@ -78,7 +78,7 @@ const List: FC<Record<string, never>> = () => {
 
   return (
     <div
-      className={`bg-[#f0ebec] dark:bg-[#202020] rounded-l-2xl overflow-hidden shadow-lg h-[80vh] ${openSearch ? "w-[100%] absolute" : "!w-[70px]"} md:w-[360px] p-3 md:py-5 md:px-5`}>
+      className={`bg-[#f0ebec] dark:bg-[#202020] rounded-l-2xl overflow-hidden shadow-lg h-[80vh] ${openSearch ? "w-[100%] absolute" : ""} md:w-[360px] p-3 md:py-5 md:px-5`}>
       <div className="flex items-center justify-between">
         <SearchBar openSearch={openSearch} setOpenSearch={setOpenSearch} />
         <MdCancel
@@ -88,9 +88,15 @@ const List: FC<Record<string, never>> = () => {
           className={`text-3xl ${openSearch ? "flex" : "hidden"} text-red-700 items-center`}
         />
       </div>
-      <Suspense fallback={<p>hello</p>}>
-        <ListEmail setOpenSearch={setOpenSearch} openSearch={openSearch} list={listName} />
-      </Suspense>
+      <div className={`${openSearch ? "w-[100%] absolute" : "w-[55px]"}`}>
+        <Suspense fallback={<p>hello</p>}>
+          <ListEmail
+            setOpenSearch={setOpenSearch}
+            openSearch={openSearch}
+            list={listName}
+          />
+        </Suspense>
+      </div>
     </div>
   );
 };
