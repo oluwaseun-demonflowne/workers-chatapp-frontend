@@ -37,7 +37,7 @@ const ListEmail = ({ list, openSearch, setOpenSearch }: Props) => {
   }, [senderEmail, getOnlineUsers]);
 
   return (
-    <div className="mt-10 md:pt-0 md:mt-5 remove-overflow h-[400px] overflow-y-scroll">
+    <div className="mt-10  md:pt-0 md:mt-5 remove-overflow h-[400px] overflow-y-scroll">
       {list.map((i, index) => {
         const config = genConfig(i.email);
         return (
@@ -47,7 +47,7 @@ const ListEmail = ({ list, openSearch, setOpenSearch }: Props) => {
               setEmail(i.email);
               setOpenSearch(false);
             }}
-            className=" md:py-4 md:px-2  mt-5 md:mt-0 cursor-pointer md:hover:bg-[#e3dfdf] md:dark:hover:bg-slate-600  rounded-lg flex items-center gap-3">
+            className=" md:py-4 md:px-2 md:mt-0 border cursor-pointer md:hover:bg-[#e3dfdf] md:dark:hover:bg-slate-600  rounded-lg flex items-center gap-3">
             <div className="flex">
               <Avatar
                 key={i.email}
