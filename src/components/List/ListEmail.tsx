@@ -47,7 +47,7 @@ const ListEmail = ({ list, openSearch, setOpenSearch }: Props) => {
               setEmail(i.email);
               setOpenSearch(false);
             }}
-            className="py-4 md:py-4 md:px-2   cursor-pointer md:hover:bg-[#e3dfdf] md:dark:hover:bg-slate-600  rounded-lg flex items-center gap-3">
+            className="py-4 md:py-4 md:px-2   cursor-pointer md:hover:bg-[#e3dfdf] md:dark:hover:bg-slate-600  rounded-lg flex items-center gap-1">
             <div className="flex">
               <Avatar
                 key={i.email}
