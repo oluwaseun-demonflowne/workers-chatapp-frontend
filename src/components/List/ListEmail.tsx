@@ -8,6 +8,7 @@ import Avatar, { genConfig } from "react-nice-avatar";
 
 type Props = {
   list: ListName[];
+  openSearch: boolean;
 };
 
 export type Online = {
@@ -16,7 +17,7 @@ export type Online = {
   typing: boolean;
 };
 
-const ListEmail = ({ list }: Props) => {
+const ListEmail = ({ list, openSearch }: Props) => {
   const { socket } = useSocket();
   // const [getOnlineUsers, setGetOnlineUsers] = useState<Online[]>([]);
   const { getOnlineUsers, setGetOnlineUsers } = useSocketStateZustand();
@@ -51,13 +52,75 @@ const ListEmail = ({ list }: Props) => {
                 style={{ width: "2rem", height: "2rem" }}
                 {...config}
               />
-              {getOnlineUsers.some(
-                (onlineUser) => onlineUser.email === i.email
-              ) ? (
-                <span
-                  key={index}
-                  className=" p-1 mt-[-6px] md:hidden h-fit  bg-green-700 rounded-[50%] text-green-700"></span>
-              ) : null}
+              <div className="flex flex-col ">
+                {getOnlineUsers.some(
+                  (onlineUser) => onlineUser.email === i.email
+                ) ? (
+                  <span
+                    key={index}
+                    className=" p-1 mt-[-6px] md:hidden h-fit w-fit  bg-green-700 rounded-[50%] text-green-700"></span>
+                ) : (
+                  <span
+                    key={index}
+                    className=" p-1 mt-[-6px] md:hidden h-fit w-fit bg-red-500 rounded-[50%] text-green-700"></span>
+                )}
+                <div
+                  className={`mt-[19px] ${openSearch ? "hidden" : ""} md:hidden`}>
+                  {i.status === "read" ? (
+                    <div className="flex gap-1 items-center">
+                      <MdMarkEmailRead
+                        className={`text-blue-500 ${
+                          i.senderEmail === senderEmail ? "hidden" : "block"
+                        } text-base`}
+                      />
+                      <p className="flex items-center">
+                        <span
+                          className={`${
+                            i.senderEmail !== senderEmail ? "hidden" : "block"
+                          }`}>
+                          <MdCheck className="text-[#007aff] text-base" />
+                          <MdCheck className="mt-[-12px] text-[#007aff] text-base" />
+                        </span>
+                      </p>
+                    </div>
+                  ) : i.status === "delivered" ? (
+                    <div className="flex gap-1 items-center">
+                      <MdMarkEmailUnread
+                        className={`text-red-600 ${
+                          i.senderEmail === senderEmail ? "hidden" : "block"
+                        } text-base`}
+                      />
+                      <p className="flex items-center">
+                        <span
+                          className={`${
+                            i.senderEmail !== senderEmail ? "hidden" : "block"
+                          }`}>
+                          <MdCheck className="text-base" />
+                          <MdCheck className="mt-[-12px] text-base" />
+                        </span>
+                        {i.message}
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="flex gap-1 items-center">
+                      <MdMarkEmailUnread
+                        className={`text-red-600 ${
+                          i.senderEmail === senderEmail ? "hidden" : "block"
+                        } text-base`}
+                      />
+                      <p className="flex items-center">
+                        <span
+                          className={`${
+                            i.senderEmail !== senderEmail ? "hidden" : "block"
+                          }`}>
+                          <MdCheck className=" text-base" />
+                        </span>
+                        {i.message}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
             <div className="w-full  md:block">
               <p className="text-[15px] flex justify-between  w-[100%] dark:text-[#d7dadc] font-semibold">
@@ -104,7 +167,7 @@ const ListEmail = ({ list }: Props) => {
                       {i.message}
                     </p>
                   </div>
-                ) : (
+                ) : i.status === "delivered" ? (
                   <div className="flex gap-1 items-center">
                     <MdMarkEmailUnread
                       className={`text-red-600 ${
@@ -118,6 +181,23 @@ const ListEmail = ({ list }: Props) => {
                         }`}>
                         <MdCheck className="text-base" />
                         <MdCheck className="mt-[-12px] text-base" />
+                      </span>
+                      {i.message}
+                    </p>
+                  </div>
+                ) : (
+                  <div className="flex gap-1 items-center">
+                    <MdMarkEmailUnread
+                      className={`text-red-600 ${
+                        i.senderEmail === senderEmail ? "hidden" : "block"
+                      } text-base`}
+                    />
+                    <p className="flex items-center">
+                      <span
+                        className={`${
+                          i.senderEmail !== senderEmail ? "hidden" : "block"
+                        }`}>
+                        <MdCheck className=" text-base" />
                       </span>
                       {i.message}
                     </p>
