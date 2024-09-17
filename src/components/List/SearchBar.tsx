@@ -30,7 +30,7 @@ type Props = {
 //   // picture: session?.user?.image,
 // });
 const SearchBar = ({ openSearch, setOpenSearch }: Props) => {
-  const { senderEmail } = useEmailState();
+  const { senderEmail, setEmail } = useEmailState();
   const { setChats } = useChat();
 
   const [searchEmail, setSearchEmail] = useState<Chat>({
@@ -89,6 +89,7 @@ const SearchBar = ({ openSearch, setOpenSearch }: Props) => {
       <FaSearch
         onClick={() => {
           setOpenSearch(true);
+          setEmail("");
         }}
         className="absolute md:pointer-events-none top-3 left-2 text-slate-400"
       />

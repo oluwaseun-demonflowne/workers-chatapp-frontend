@@ -89,7 +89,7 @@ const List: FC<Record<string, never>> = () => {
         />
       </div>
       <Suspense fallback={<p>hello</p>}>
-        <ListEmail openSearch={openSearch} list={listName} />
+        <ListEmail setOpenSearch={setOpenSearch} openSearch={openSearch} list={listName} />
       </Suspense>
     </div>
   );

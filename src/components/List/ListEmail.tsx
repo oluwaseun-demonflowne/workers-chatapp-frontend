@@ -2,13 +2,14 @@
 import { useSocket } from "@/providers/Socket";
 import { useEmailState, useSocketStateZustand } from "@/store";
 import { type ListName } from "@/types/listTypes";
-import React, { useEffect } from "react";
+import React, { type Dispatch, type SetStateAction, useEffect } from "react";
 import { MdCheck, MdMarkEmailRead, MdMarkEmailUnread } from "react-icons/md";
 import Avatar, { genConfig } from "react-nice-avatar";
 
 type Props = {
   list: ListName[];
   openSearch: boolean;
+  setOpenSearch: Dispatch<SetStateAction<boolean>>;
 };
 
 export type Online = {
@@ -17,7 +18,7 @@ export type Online = {
   typing: boolean;
 };
 
-const ListEmail = ({ list, openSearch }: Props) => {
+const ListEmail = ({ list, openSearch, setOpenSearch }: Props) => {
   const { socket } = useSocket();
   // const [getOnlineUsers, setGetOnlineUsers] = useState<Online[]>([]);
   const { getOnlineUsers, setGetOnlineUsers } = useSocketStateZustand();
@@ -44,6 +45,7 @@ const ListEmail = ({ list, openSearch }: Props) => {
             key={index}
             onClick={() => {
               setEmail(i.email);
+              setOpenSearch(false);
             }}
             className="py-4 md:py-4 md:px-2   cursor-pointer md:hover:bg-[#e3dfdf] md:dark:hover:bg-slate-600  rounded-lg flex items-center gap-3">
             <div className="flex">
@@ -81,6 +83,9 @@ const ListEmail = ({ list, openSearch }: Props) => {
                           <MdCheck className="text-[#007aff] text-base" />
                           <MdCheck className="mt-[-12px] text-[#007aff] text-base" />
                         </span>
+                        {/* {i.message.length > 15
+                        ? `${i.message.substring(0, 15)}...`
+                        : i.message} */}
                       </p>
                     </div>
                   ) : i.status === "delivered" ? (
@@ -98,7 +103,7 @@ const ListEmail = ({ list, openSearch }: Props) => {
                           <MdCheck className="text-base" />
                           <MdCheck className="mt-[-12px] text-base" />
                         </span>
-                        {i.message}
+                        {/* {i.message} */}
                       </p>
                     </div>
                   ) : (
@@ -115,7 +120,7 @@ const ListEmail = ({ list, openSearch }: Props) => {
                           }`}>
                           <MdCheck className=" text-base" />
                         </span>
-                        {i.message}
+                        {/* {i.message} */}
                       </p>
                     </div>
                   )}
@@ -164,7 +169,9 @@ const ListEmail = ({ list, openSearch }: Props) => {
                         <MdCheck className="text-[#007aff] text-base" />
                         <MdCheck className="mt-[-12px] text-[#007aff] text-base" />
                       </span>
-                      {i.message}
+                      {i.message.length > 15
+                        ? `${i.message.substring(0, 15)}...`
+                        : i.message}
                     </p>
                   </div>
                 ) : i.status === "delivered" ? (
@@ -182,7 +189,9 @@ const ListEmail = ({ list, openSearch }: Props) => {
                         <MdCheck className="text-base" />
                         <MdCheck className="mt-[-12px] text-base" />
                       </span>
-                      {i.message}
+                      {i.message.length > 15
+                        ? `${i.message.substring(0, 15)}...`
+                        : i.message}
                     </p>
                   </div>
                 ) : (
@@ -199,7 +208,9 @@ const ListEmail = ({ list, openSearch }: Props) => {
                         }`}>
                         <MdCheck className=" text-base" />
                       </span>
-                      {i.message}
+                      {i.message.length > 15
+                        ? `${i.message.substring(0, 15)}...`
+                        : i.message}
                     </p>
                   </div>
                 )}

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useEmailState } from "@/store";
 import React, { type FC } from "react";
 import { MdOutlineDisabledByDefault } from "react-icons/md";
@@ -14,7 +14,12 @@ const WhoWeText: FC<Props> = ({ email }) => {
       <p className="font-semibold text-slate-500 dark:text-[#d7dadc]">
         To: {email}
       </p>
-      <MdOutlineDisabledByDefault onClick={() => {setEmail("")}} className="text-slate-500 text-lg cursor-pointer hover:opacity-70 dark:text-[#d7dadc] " />
+      <MdOutlineDisabledByDefault
+        onClick={() => {
+          setEmail("");
+        }}
+        className="text-slate-500 text-lg cursor-pointer hover:opacity-70 dark:text-[#d7dadc] "
+      />
     </div>
   );
 };
