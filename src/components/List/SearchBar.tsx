@@ -93,7 +93,7 @@ const SearchBar = ({ openSearch, setOpenSearch }: Props) => {
         className="absolute md:pointer-events-none top-3 left-2 text-slate-400"
       />
       <button className={`${openSearch ? "flex" : "hidden md:flex"} md:flex`}>
-        <MdSms className="text-4xl md:text-2xl ml-2" />
+        <MdSms className="text-4xl  md:text-2xl ml-2" />
       </button>
     </form>
   );
