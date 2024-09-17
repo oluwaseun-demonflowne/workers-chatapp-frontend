@@ -5,6 +5,7 @@ import { SocketProvider } from "@/providers/Socket";
 import { TheProviders } from "@/providers/Theme";
 import ThemeSwitch from "@/providers/ThemeSwitch";
 import { AuthContextProvider } from "@/providers/ClientAuth";
+import {Toaster} from "sonner"
 
 const inter = Oxanium({ subsets: ["latin"] });
 
@@ -33,6 +34,7 @@ export default function RootLayout({
           <AuthContextProvider>
             <TheProviders>
               <ThemeSwitch />
+              <Toaster />
               {children}
             </TheProviders>
           </AuthContextProvider>

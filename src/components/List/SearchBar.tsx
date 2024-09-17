@@ -3,6 +3,7 @@ import { type Chat } from "@/types/chatType";
 import React, { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { MdSms } from "react-icons/md";
+import { toast } from "sonner";
 
 // export type Chat = {
 //   senderEmail: string;
@@ -38,6 +39,15 @@ const SearchBar = () => {
   const addEmail = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (senderEmail === searchEmail.receiverEmail) {
+      toast.error("Can't text yourself");
+      setSearchEmail({
+        senderEmail: senderEmail,
+        receiverEmail: "",
+        chatId: Math.floor(Math.random() * 1000000),
+        message: "",
+        image: [],
+        status: "sent"
+      });
       return;
     }
     setChats(searchEmail);
