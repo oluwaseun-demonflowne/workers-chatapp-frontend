@@ -94,7 +94,7 @@ const InputBox = () => {
             setText(e.currentTarget.value);
           }}
           // onKeyDown={() => handleTyping()}
-          className="px-3 h-11 max-h-40 min-h-11  dark:border-slate-400 dark:bg-slate-600 dark:text-[#d7dadc] outline-none py-2 border rounded-md overflow-hidden text-[13px] w-full"
+          className="px-3 h-11 max-h-40 min-h-11  dark:border-slate-400 dark:bg-slate-600 dark:text-[#d7dadc] outline-none py-2 border rounded-md overflow-hidden text-lg md:text-[13px] w-full"
           placeholder="iMessage"
         />
         <div className="flex gap-3 items-center">

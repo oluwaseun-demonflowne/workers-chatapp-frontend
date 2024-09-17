@@ -35,7 +35,7 @@ const ListEmail = ({ list }: Props) => {
   }, [senderEmail, getOnlineUsers]);
 
   return (
-    <div className="mt-5 remove-overflow h-[400px] overflow-y-scroll">
+    <div className="mt-10 md:mt-5 remove-overflow h-[400px] overflow-y-scroll">
       {list.map((i, index) => {
         const config = genConfig(i.email);
         return (
@@ -44,13 +44,22 @@ const ListEmail = ({ list }: Props) => {
             onClick={() => {
               setEmail(i.email);
             }}
-            className="py-4 px-2  cursor-pointer hover:bg-[#e3dfdf] dark:hover:bg-slate-600  rounded-lg flex items-center gap-3">
-            <Avatar
-              key={i.email}
-              style={{ width: "2rem", height: "2rem" }}
-              {...config}
-            />
-            <div className="w-full">
+            className="py-4 md:py-4 md:px-2   cursor-pointer md:hover:bg-[#e3dfdf] md:dark:hover:bg-slate-600  rounded-lg flex items-center gap-3">
+            <div className="flex">
+              <Avatar
+                key={i.email}
+                style={{ width: "2rem", height: "2rem" }}
+                {...config}
+              />
+              {getOnlineUsers.some(
+                (onlineUser) => onlineUser.email === i.email
+              ) ? (
+                <span
+                  key={index}
+                  className=" p-1 mt-[-6px] md:hidden h-fit  bg-green-700 rounded-[50%] text-green-700"></span>
+              ) : null}
+            </div>
+            <div className="w-full  md:block">
               <p className="text-[15px] flex justify-between  w-[100%] dark:text-[#d7dadc] font-semibold">
                 {i.email.length > 15
                   ? `${i.email.substring(0, 15)}...`
@@ -60,7 +69,7 @@ const ListEmail = ({ list }: Props) => {
                 ) ? (
                   <span
                     key={index}
-                    className=" p-1 h-fit mt-2 bg-green-700 rounded-[50%] text-green-700"></span>
+                    className=" p-1 h-fit hidden md:flex mt-2 bg-green-700 rounded-[50%] text-green-700"></span>
                 ) : null}
               </p>
               <div className="text-[14px] text-slate-500 font-bold">

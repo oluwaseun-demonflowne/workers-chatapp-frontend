@@ -112,11 +112,11 @@ const VerifyEmail = ({
                 setLoading(false);
               }
               if (response.status === 402) {
-                setDisableInput(true);
                 setError({
                   error: true,
                   errorMsg: "Token expired, please request new token"
                 });
+                setDisableInput(false);
                 setLoading(false);
               }
 
@@ -129,7 +129,7 @@ const VerifyEmail = ({
           <p className="text-[22px] dark:text-[#d7dadc] text-gray-600 font-medium">
             Verify your email address to start conversations.
           </p>
-          <p className="text-[13px] mt-4 dark:text-[#d7dadc] text-gray-500 font-light">
+          <p className="text-[15px] md:text-[13px] mt-4 dark:text-[#d7dadc] text-gray-500 font-light">
             An email with a verification code has been sent to{" "}
             <span className="semibold">{chatter} Enter the code below</span>
           </p>
@@ -141,7 +141,7 @@ const VerifyEmail = ({
                     required
                     className={`text-sm ${
                       disableInput ? "pointer-events-none opacity-20" : ""
-                    } rounded-md dark:bg-slate-600 dark:text-[#d7dadc] outline-[#007aff] w-8 border h-8 p-2 border-slate-400 dark:border-slate-400 `}
+                    } rounded-md dark:bg-slate-600 dark:text-[#d7dadc] outline-[#007aff] w-8 border text-lg h-8 p-2 border-slate-400 dark:border-slate-400 `}
                     key={index}
                     // @ts-expect-error skill issues ejeh
                     // damn
@@ -171,7 +171,7 @@ const VerifyEmail = ({
                 setLoading(false);
               }}
               disabled={loading}
-              className={`text-[13px] text-[#304fff] ${
+              className={`text-[15px] md:text-[13px] text-[#304fff] ${
                 loading ? "opacity-30" : ""
               } text-center mt-5 font-light`}>
               Didn&apos;t get a code? Request new code

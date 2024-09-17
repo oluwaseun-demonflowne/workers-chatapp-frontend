@@ -28,7 +28,7 @@ const FormEmail = ({
 
   return (
     <form
-      className={`w-[100%] md:w-[800px] ${
+      className={` md:w-[800px] ${
         openVerifyModel ? "opacity-30 z-[-1]" : ""
       }  bg-white dark:bg-[#202020] overflow-hidden shadow-xl rounded-2xl`}
       onSubmit={async (e) => {
@@ -58,7 +58,7 @@ const FormEmail = ({
         <h1 className="text-2xl dark:text-[#007aff] font-bold text-slate-500">
           Sign in to Message your Family & Friends
         </h1>
-        <p className="text-[13px] mt-[-10px] font-light text-slate-500 dark:text-[#d7dadc]">
+        <p className="text-[15px] md:text-[13px] mt-[-10px] font-light text-slate-500 dark:text-[#d7dadc]">
           Sign in with your email to unlock the power of connection!. We will
           send a secret code to verify your identity.Let the messaging magic
           begin!!!
@@ -70,7 +70,7 @@ const FormEmail = ({
             setChatter(e.currentTarget.value);
           }}
           placeholder="Email Address"
-          className="bg-[#e3dfdf] text-slate-600 rounded-md  border dark:border-slate-400 p-2 text-[15px] dark:bg-slate-600 dark:text-[#d7dadc] w-72 outline-none "
+          className="bg-[#e3dfdf] text-slate-600 rounded-md  border dark:border-slate-400 p-2 text-lg dark:bg-slate-600 dark:text-[#d7dadc] w-72 outline-none "
           type="email"
         />
       </div>
@@ -81,7 +81,7 @@ const FormEmail = ({
           // initial={{ scaleY: 0, backgroundColor: "red" }}
           // transition={{ duration: 0.4 }}
           className={`w-40 button-57 text ${
-            loading ? "opacity-30" : ""
+            loading ? "opacity-30 pointer-events-none" : ""
           }  py-4 border border-slate-300  rounded-md font-light dark:border-slate-500 dark:text-[#d7dadc] text-slate-600 text-[14px] bg-white dark:bg-slate-600`}>
           <span>Verify</span>
           <span>Verify</span>
