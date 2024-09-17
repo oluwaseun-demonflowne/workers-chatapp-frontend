@@ -13,7 +13,6 @@ const Chat: FC<Record<string, never>> = () => {
   const { chats, setChats, filteredChat, resetChat, tempChat } = useChat();
   const { socket } = useSocket();
 
-
   useEffect(() => {
     socket?.on("sentMessageFromServer", (data: Data) => {
       setChats(data.data);

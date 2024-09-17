@@ -11,13 +11,12 @@ const List: FC<Record<string, never>> = () => {
   const { chats } = useChat();
   const { senderEmail } = useEmailState();
 
-
   const handleData = (names: Chat[]) => {
     const emailMap: ListNameType = {};
 
     names.forEach((item) => {
       // if (item.receiverEmail !== senderEmail) {
-      //   console.log(item.message);
+      //
       //   if (emailMap[item.receiverEmail]) {
       //     emailMap[item.receiverEmail].message = item.message;
       //     emailMap[item.receiverEmail].status = item.status;
@@ -68,12 +67,11 @@ const List: FC<Record<string, never>> = () => {
     });
     const unique = Object.values(emailMap) as ListName[];
     setListName(unique);
-    console.log(unique);
   };
-
 
   useEffect(() => {
     handleData(chats);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [senderEmail, chats]);
 
   return (

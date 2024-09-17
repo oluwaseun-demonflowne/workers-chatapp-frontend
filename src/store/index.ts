@@ -47,30 +47,31 @@ export const useEmailState = create<EmailStates & Action>((set) => ({
   setSenderEmail: (emails) => set(() => ({ senderEmail: emails }))
 }));
 
-export const useChat = create(persist<ChatStore & ChatStoreAction>(
-  (set) => ({
-    chats: [],
-    tempChat: [],
-    setChats: (theChat: Chat) =>
-      set((state) => ({ chats: [...state.chats, theChat] })),
-    resetChat: () => set(() => ({ tempChat: [] })),
-    filteredChat: (filtered: Chat[]) => set(() => ({ tempChat: filtered })),
-    statusChanged: (email: string) =>
-      set((state) => ({
-        chats: state.chats.map((i) => {
-          if (i.senderEmail === email || i.receiverEmail === email) {
-            return { ...i, status: "read" };
-          } else {
-            return { ...i };
-          }
-        })
-      }))
-  }),
-  {
-    name: "chats-set", // unique name for the item in the storage
-    storage: createJSONStorage(() => localStorage) // specify local storage
-  }
-)
+export const useChat = create(
+  persist<ChatStore & ChatStoreAction>(
+    (set) => ({
+      chats: [],
+      tempChat: [],
+      setChats: (theChat: Chat) =>
+        set((state) => ({ chats: [...state.chats, theChat] })),
+      resetChat: () => set(() => ({ tempChat: [] })),
+      filteredChat: (filtered: Chat[]) => set(() => ({ tempChat: filtered })),
+      statusChanged: (email: string) =>
+        set((state) => ({
+          chats: state.chats.map((i) => {
+            if (i.senderEmail === email || i.receiverEmail === email) {
+              return { ...i, status: "read" };
+            } else {
+              return { ...i };
+            }
+          })
+        }))
+    }),
+    {
+      name: "chats-set", // unique name for the item in the storage
+      storage: createJSONStorage(() => localStorage) // specify local storage
+    }
+  )
 );
 
 export const useSocketStateZustand = create<SocketState & SocketStateAction>(

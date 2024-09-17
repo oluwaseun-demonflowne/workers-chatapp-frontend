@@ -41,7 +41,7 @@ export default function EmojiSelector(props: Props) {
           setIsOpen(false);
         }
 
-        // console.log(isOpen);
+        //
         // isOpen &&
       }
     };

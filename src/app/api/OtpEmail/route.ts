@@ -10,8 +10,6 @@ export const POST = async (req: Request, _res: Response) => {
     .toString()
     .padStart(6, "0");
 
-  console.log(SIX_DIGIT_OTP);
-
   const accessToken = sign(
     {
       OTP: SIX_DIGIT_OTP
@@ -51,7 +49,6 @@ export const POST = async (req: Request, _res: Response) => {
       status: 200
     });
   } catch (error) {
-    console.log(error);
     return new Response(JSON.stringify("error"), {
       status: 500
     });

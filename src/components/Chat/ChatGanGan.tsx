@@ -31,7 +31,7 @@ const ChatGanGan: FC<Props> = ({ chats, email, senderEmail }) => {
     socket?.on("seen", (receiver: string) => {
       if (receiver === senderEmail) {
         //  this would now make the senderEmail the person recieving incase i am confused later on because this code only runs to the person who recieved
-        // console.log("receiver", email, "sender", senderEmail);
+        //
         socket?.emit("reciever-seen", {
           receiverEmail: email,
           senderEmail

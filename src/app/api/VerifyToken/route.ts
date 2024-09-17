@@ -27,7 +27,7 @@ export const POST = async (req: Request, _res: Response) => {
       status: 401
     });
 
-  //   console.log(authHeader.get("otpToken"));
+  //
 
   // const OTPs = authHeader.get("otpToken");
 
@@ -64,7 +64,6 @@ export const POST = async (req: Request, _res: Response) => {
       status: 401
     });
   } catch (error) {
-    console.log(error);
     //  unknown error
     return new Response(JSON.stringify("Oboy Error again"), {
       status: 500

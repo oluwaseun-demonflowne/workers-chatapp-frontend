@@ -20,7 +20,7 @@ const InputBox = () => {
 
   const textTypeRef = useRef<HTMLInputElement | null>(null);
 
-  // console.log(arrayImages);
+  //
 
   const submitInput = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

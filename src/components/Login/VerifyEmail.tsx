@@ -119,11 +119,9 @@ const VerifyEmail = ({
                 });
                 setLoading(false);
               }
-              console.log(response.json());
 
               // setOpenVerifyModal(true);
             } catch (error) {
-              console.log(error);
               setLoading(false);
             }
           }}

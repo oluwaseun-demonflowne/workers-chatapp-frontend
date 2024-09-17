@@ -6,7 +6,7 @@ export const getCode = async (
   setOpenVerifyModal?: Dispatch<SetStateAction<boolean>>
 ) => {
   setLoading(true);
-  
+
   try {
     const response = await fetch("/api/OtpEmail", {
       body: JSON.stringify({ email: chatter }),
@@ -20,10 +20,9 @@ export const getCode = async (
       setLoading(false);
       //   setOpenVerifyModal && setOpenVerifyModal(true);
     }
-    // console.log(response.json());
+    //
     // setSenderEmail(chatter);
   } catch (error) {
-    console.log(error);
     setLoading(false);
   }
 };

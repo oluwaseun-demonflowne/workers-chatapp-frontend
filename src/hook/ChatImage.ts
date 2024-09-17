@@ -7,7 +7,7 @@ export const useChatImage = () => {
   // const [linkUrl, setLinkUrl] = useState("");
   const { startUpload } = useUploadThing("chatImageUpload", {
     onClientUploadComplete: async (res) => {
-      console.log(res);
+      res;
     },
     onUploadError: () => {
       toast.error("Error Updating file, ReUpload");

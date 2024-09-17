@@ -38,32 +38,29 @@ export const AuthContextProvider = ({
   const { setSenderEmail, senderEmail } = useEmailState();
   const cookieStore = new Cookies();
   const token = cookieStore.get("chat-auth");
-  // console.log(token);
+  //
 
   const Auth = async () => {
-    // console.log("doe this run");
-    // console.log(token);
+    //
+    //
     if (token === null) {
       setEmail(null);
       return null;
     }
-    // console.log(cookieStore);
+    //
     try {
       const payload: JWTVerifyResult<payloadType> = await jwtVerify(
         token,
         new TextEncoder().encode("14f7caeb710d535c6d334390db7862e3")
       );
-      console.log(payload.payload.email);
+
       setSenderEmail(payload.payload.email);
       return payload.payload.email;
     } catch (error) {
-      console.log(error);
       setEmail(null);
       return null;
     }
   };
-
-  console.log(email, "nothing");
 
   useEffect(() => {
     const startAuth = async () => {

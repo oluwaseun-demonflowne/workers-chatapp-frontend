@@ -1,3 +1,1 @@
-export const useEmojiSelector = () => {
-    
-}
+export const useEmojiSelector = () => {};

@@ -35,7 +35,7 @@ const ImageChat = ({ setArrayImages, arrayImages }: Props) => {
           const findDuplicate = arrayImages.find(
             (i) => i === URL.createObjectURL(filhaha)
           );
-          console.log(findDuplicate);
+
           if (findDuplicate !== undefined) {
             setLoading(false);
             throw new Error("Don't upload duplicate");
