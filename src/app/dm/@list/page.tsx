@@ -79,7 +79,7 @@ const List: FC<Record<string, never>> = () => {
   return (
     <div
       className={`bg-[#f0ebec] dark:bg-[#202020] rounded-l-2xl overflow-hidden shadow-lg h-[80vh] ${openSearch ? "w-[100%] absolute" : "w-20"} md:w-[360px] p-3 md:py-5 md:px-5`}>
-      <div className="flex justify-between">
+      <div className="flex items-center justify-between">
         <SearchBar openSearch={openSearch} setOpenSearch={setOpenSearch} />
         <MdCancel
           onClick={() => {
