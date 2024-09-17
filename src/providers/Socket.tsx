@@ -1,6 +1,6 @@
 "use client";
 import { type Online } from "@/components/List/ListEmail";
-import { useChat, useEmailState, useSocketStateZustand } from "@/store";
+import { useEmailState, useSocketStateZustand } from "@/store";
 import { createContext, useContext, useEffect, useState } from "react";
 import { type Socket, io } from "socket.io-client";
 
@@ -20,12 +20,11 @@ export const useSocket = () => {
 
 export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
   const { senderEmail } = useEmailState();
-  const {chats} = useChat()
   const [socket, setSocket] = useState<Socket | null>(null);
   const [isConnected, setIsConnected] = useState(false);
   const { setGetOnlineUsers } = useSocketStateZustand();
 
-  console.log(chats)
+  
 
   useEffect(() => {
     // https://workers-chatapp-backend.onrender.com/
