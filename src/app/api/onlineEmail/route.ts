@@ -16,7 +16,7 @@ export const POST = async (req: Request, _res: Response) => {
     from: process.env.NODEMAILER_EMAIL,
     to: email,
     subject: "ChatterBox - Come Online",
-    text: `${senderEmail} has asked you to come online`
+    text: `${senderEmail} has asked you to come online <br></br> <a href="https://workers-chatapp-frontend.vercel.app/login">Click here to login</a>`
   };
 
   try {
