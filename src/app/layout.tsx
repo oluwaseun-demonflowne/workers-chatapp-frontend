@@ -34,7 +34,7 @@ export default function RootLayout({
           <AuthContextProvider>
             <TheProviders>
               <ThemeSwitch />
-              <Toaster />
+              <Toaster visibleToasts={1} />
               {children}
             </TheProviders>
           </AuthContextProvider>

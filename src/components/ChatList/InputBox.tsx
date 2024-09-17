@@ -1,12 +1,13 @@
 "use client";
 import { useSocket } from "@/providers/Socket";
-import { useEmailState } from "@/store";
+import { useEmailState, useSocketStateZustand } from "@/store";
 import React, { type FormEvent, useEffect, useRef, useState } from "react";
 import { MdSend } from "react-icons/md";
 import EmojiSelector from "./EmojiSelector";
 import ImageChat from "./ImageChat";
 import PreUpload from "./PreUpload";
 import { emojis } from "@/templates/emoji";
+import { toast } from "sonner";
 
 const InputBox = () => {
   const [text, setText] = useState("");
@@ -14,6 +15,7 @@ const InputBox = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [arrayImages, setArrayImages] = useState<string[]>([]);
   const { email, senderEmail } = useEmailState();
+  const { getOnlineUsers } = useSocketStateZustand();
   // const [loading, setLoading] = useState(false);
   const { socket } = useSocket();
   const emojiStarterRef = useRef<HTMLButtonElement | null>(null);
@@ -24,6 +26,29 @@ const InputBox = () => {
 
   const submitInput = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const checkifEmailOnline = getOnlineUsers.find((i) => i.email === email);
+    if (!checkifEmailOnline) {
+      toast.error(`Error messaging ${email}, not online`, {
+        duration: 3000,
+        action: {
+          label: "Send Email to notify",
+          onClick: async () => {
+            toast.loading("Email sending");
+            try {
+              await fetch("/api/onlineEmail", {
+                body: JSON.stringify({ email: email, senderEmail }),
+                method: "POST"
+              });
+              toast.success("Email sent", { duration: 2000 });
+            } catch (error) {
+              toast.error("Message not sent");
+            }
+            toast.dismiss();
+          }
+        }
+      });
+      return;
+    }
     socket?.emit("sentMessage", {
       chatId: Math.floor(Math.random() * 1000000),
       message: text,
