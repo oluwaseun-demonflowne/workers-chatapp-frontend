@@ -37,7 +37,8 @@ const ListEmail = ({ list, openSearch, setOpenSearch }: Props) => {
   }, [senderEmail, getOnlineUsers]);
 
   return (
-    <div className={`${openSearch ? "mt-8" : "mt-16"} md:pt-0 md:mt-5 remove-overflow h-[400px] overflow-y-scroll`}>
+    <div
+      className={`${openSearch ? "mt-8" : "mt-16"} md:pt-0 md:mt-5 remove-overflow h-[400px] overflow-y-scroll`}>
       {list.map((i, index) => {
         const config = genConfig(i.email);
         return (
@@ -47,7 +48,7 @@ const ListEmail = ({ list, openSearch, setOpenSearch }: Props) => {
               setEmail(i.email);
               setOpenSearch(false);
             }}
-            className={`  md:py-4 md:px-2  ${openSearch ? "mt-5" : "mt-0"} md:mt-0 border cursor-pointer md:hover:bg-[#e3dfdf] md:dark:hover:bg-slate-600  rounded-lg flex items-center gap-3`}>
+            className={`  md:py-4 md:px-2  ${openSearch ? "mt-5" : "mt-0 !h-20"} md:mt-0 border cursor-pointer md:hover:bg-[#e3dfdf] md:dark:hover:bg-slate-600  rounded-lg flex items-center gap-3`}>
             <div className="flex">
               <Avatar
                 key={i.email}
@@ -84,7 +85,7 @@ const ListEmail = ({ list, openSearch, setOpenSearch }: Props) => {
                           <MdCheck className="mt-[-12px] text-[#007aff] text-base" />
                         </span>
                         {/* {i.message.length > 15
-                        ? `${i.message.substring(0, 25)}...`
+                        ? `${i.message.substring(0, 35)}...`
                         : i.message} */}
                       </p>
                     </div>
@@ -170,7 +171,7 @@ const ListEmail = ({ list, openSearch, setOpenSearch }: Props) => {
                         <MdCheck className="mt-[-12px] text-[#007aff] text-base" />
                       </span>
                       {i.message.length > 15
-                        ? `${i.message.substring(0, 25)}...`
+                        ? `${i.message.substring(0, 35)}...`
                         : i.message}
                     </p>
                   </div>
@@ -190,7 +191,7 @@ const ListEmail = ({ list, openSearch, setOpenSearch }: Props) => {
                         <MdCheck className="mt-[-12px] text-base" />
                       </span>
                       {i.message.length > 15
-                        ? `${i.message.substring(0, 25)}...`
+                        ? `${i.message.substring(0, 35)}...`
                         : i.message}
                     </p>
                   </div>
@@ -209,7 +210,7 @@ const ListEmail = ({ list, openSearch, setOpenSearch }: Props) => {
                         <MdCheck className=" text-base" />
                       </span>
                       {i.message.length > 15
-                        ? `${i.message.substring(0, 25)}...`
+                        ? `${i.message.substring(0, 35)}...`
                         : i.message}
                     </p>
                   </div>
