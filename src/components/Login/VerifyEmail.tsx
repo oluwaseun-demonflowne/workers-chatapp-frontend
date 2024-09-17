@@ -102,6 +102,7 @@ const VerifyEmail = ({
               }
               if (response.status === 500) {
                 setLoading(false);
+                setCodes(["", "", "", "", "", ""]);
               }
               if (response.status === 401) {
                 // incorrect key , please retry
@@ -109,6 +110,7 @@ const VerifyEmail = ({
                   error: true,
                   errorMsg: "incorrect key , please retry"
                 });
+                setCodes(["", "", "", "", "", ""]);
                 setLoading(false);
               }
               if (response.status === 402) {
@@ -118,11 +120,13 @@ const VerifyEmail = ({
                 });
                 setDisableInput(false);
                 setLoading(false);
+                setCodes(["", "", "", "", "", ""]);
               }
 
               // setOpenVerifyModal(true);
             } catch (error) {
               setLoading(false);
+              setCodes(["", "", "", "", "", ""]);
             }
           }}
           className="mt-6 ">
