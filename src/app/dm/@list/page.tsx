@@ -17,35 +17,6 @@ const List: FC<Record<string, never>> = () => {
     const emailMap: ListNameType = {};
 
     names.forEach((item) => {
-      // if (item.receiverEmail !== senderEmail) {
-      //
-      //   if (emailMap[item.receiverEmail]) {
-      //     emailMap[item.receiverEmail].message = item.message;
-      //     emailMap[item.receiverEmail].status = item.status;
-      //     emailMap[item.receiverEmail].senderEmail = item.senderEmail;
-      //   } else
-      //     [
-      //       (emailMap[item.receiverEmail] = {
-      //         email: item.receiverEmail,
-      //         message: item.message,status: item.status ?? "unknown", // Provide a default value if status is undefined
-      //         senderEmail: item.senderEmail
-      //       })
-      //     ];
-      // } else {
-      //   if (emailMap[item.senderEmail]) {
-      //     emailMap[item.senderEmail].message = item.message;
-      //     emailMap[item.senderEmail].status = item.status;
-      //     emailMap[item.senderEmail].senderEmail = item.senderEmail;
-      //   } else
-      //     [
-      //       (emailMap[item.senderEmail] = {
-      //         email: item.senderEmail,
-      //         message: item.message,
-      //         status: item.status ?? "unknown", // Provide a default value if status is undefined
-      //         senderEmail: item.senderEmail
-      //       })
-      //     ];
-      // }
       const otherEmail =
         item.receiverEmail !== senderEmail
           ? item.receiverEmail
@@ -88,13 +59,13 @@ const List: FC<Record<string, never>> = () => {
           className={`text-3xl ${openSearch ? "flex" : "hidden"} text-red-700 items-center`}
         />
       </div>
-        <Suspense fallback={<p>hello</p>}>
-          <ListEmail
-            setOpenSearch={setOpenSearch}
-            openSearch={openSearch}
-            list={listName}
-          />
-        </Suspense>
+      <Suspense fallback={<p>hello</p>}>
+        <ListEmail
+          setOpenSearch={setOpenSearch}
+          openSearch={openSearch}
+          list={listName}
+        />
+      </Suspense>
     </div>
   );
 };
