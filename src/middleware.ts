@@ -10,7 +10,6 @@ export type payloadType = {
 };
 
 export async function middleware(request: NextRequest) {
-  console.log("haha")
   if (request.nextUrl.pathname.startsWith("/dm")) {
     const cookieStore = cookies();
     const token = cookieStore.get("chat-auth");
