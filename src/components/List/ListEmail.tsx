@@ -26,7 +26,6 @@ const ListEmail = ({ list, openSearch, setOpenSearch }: Props) => {
   // const [getOnlineUsers, setGetOnlineUsers] = useState<Online[]>([]);
   const { setEmail, senderEmail } = useEmailState();
 
-
   useEffect(() => {
     socket?.on("get-users", (user: Online[]) => {
       setGetOnlineUsers(user);
@@ -141,7 +140,11 @@ const ListEmail = ({ list, openSearch, setOpenSearch }: Props) => {
                   <span
                     key={index}
                     className=" p-1 h-fit hidden md:flex mt-2 bg-green-700 rounded-[50%] text-green-700"></span>
-                ) : null}
+                ) : (
+                  <span
+                    key={index}
+                    className=" p-1 h-fit hidden md:flex mt-2 bg-red-700 rounded-[50%] text-redbg-red-700"></span>
+                )}
               </p>
               <div className="text-[14px] text-slate-500 font-bold">
                 {getOnlineUsers.some(

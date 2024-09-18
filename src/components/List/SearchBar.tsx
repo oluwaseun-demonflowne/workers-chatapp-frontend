@@ -1,4 +1,4 @@
-import { useChat, useEmailState } from "@/store";
+import { useChat, useEmailState, useSocketStateZustand } from "@/store";
 import { type Chat } from "@/types/chatType";
 import React, { type Dispatch, type SetStateAction, useState } from "react";
 import { FaSearch } from "react-icons/fa";
@@ -31,6 +31,7 @@ type Props = {
 // });
 const SearchBar = ({ openSearch, setOpenSearch }: Props) => {
   const { senderEmail, setEmail } = useEmailState();
+  const { getOnlineUsers } = useSocketStateZustand();
   const { setChats } = useChat();
 
   const [searchEmail, setSearchEmail] = useState<Chat>({
@@ -86,6 +87,15 @@ const SearchBar = ({ openSearch, setOpenSearch }: Props) => {
         className={`bg-[#e3dfdf] ${openSearch ? "flex" : "hidden md:flex"}  dark:border-slate-400 dark:bg-slate-600 dark:text-[#d7dadc] rounded-md pl-9 text-slate-800 border border-slate-400 p-2 md:text-[15px] text-lg w-72 outline-none `}
         type="email"
       />
+      {!openSearch ? (
+        getOnlineUsers.some(
+          (onlineUser) => onlineUser.email === senderEmail
+        ) ? (
+          <span className=" p-1 h-fit absolute top-[-10px] left-[-5px] md:top-[-20px] md:left-[-10px]  mt-2 bg-green-700 rounded-[50%] text-green-700"></span>
+        ) : (
+          <span className=" p-1 h-fit absolute top-[-10px] left-[-5px] md:top-[-20px] md:left-[-10px]  mt-2 bg-red-700 rounded-[50%] text-redbg-red-700"></span>
+        )
+      ) : null}
       <FaSearch
         onClick={() => {
           setOpenSearch(true);
