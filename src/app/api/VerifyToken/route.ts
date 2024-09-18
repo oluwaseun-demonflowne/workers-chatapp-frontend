@@ -52,7 +52,7 @@ export const POST = async (req: Request, _res: Response) => {
         // httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         sameSite: "strict",
-        maxAge: 172800,
+        maxAge: 345600,
         path: "/"
       });
       return new Response(JSON.stringify("SIX_DIGIT_OTP"), {
