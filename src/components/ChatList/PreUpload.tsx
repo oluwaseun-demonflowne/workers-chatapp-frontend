@@ -2,6 +2,7 @@ import Image from "next/image";
 import React, { type Dispatch, type SetStateAction } from "react";
 import { shimmer, toBase64 } from "../media/Shimmer";
 import { MdCancel } from "react-icons/md";
+// import { utapi } from "@/server/uploadthing";
 
 type Props = {
   arrayImages: string[];
@@ -18,13 +19,14 @@ const PreUpload = ({ arrayImages, setArrayImages }: Props) => {
       {arrayImages.map((i) => (
         <div key={i} className="flex relative">
           <MdCancel
-            onClick={() => {
+            onClick={async () => {
               deleteImage(i);
+              // await utapi.deleteFiles(i);
             }}
             className="absolute cursor-pointer right-1 top-1"
           />
           <Image
-            className="bg-black w-10 h-10 shadow-md rounded-md"
+            className="bg-black w-20 h-20 shadow-md rounded-md"
             unoptimized={true}
             placeholder="blur"
             blurDataURL={`data:image/svg+xml;base64,${toBase64(

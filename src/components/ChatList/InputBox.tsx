@@ -8,12 +8,14 @@ import ImageChat from "./ImageChat";
 import PreUpload from "./PreUpload";
 import { emojis } from "@/templates/emoji";
 import { toast } from "sonner";
+import { useChatImage } from "@/hook/ChatImage";
 
 const InputBox = () => {
   const [text, setText] = useState("");
   const [displayEmoji, _setDisplayEmoji] = useState<string>(emojis[0]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [arrayImages, setArrayImages] = useState<string[]>([]);
+  const { loading } = useChatImage();
   const { email, senderEmail } = useEmailState();
   const { getOnlineUsers } = useSocketStateZustand();
   // const [loading, setLoading] = useState(false);
@@ -120,7 +122,9 @@ const InputBox = () => {
             className={`${
               text.length < 1 ? "pointer-events-none opacity-30" : ""
             }`}>
-            <MdSend className="text-2xl text-slate-600" />
+            <MdSend
+              className={`text-2xl ${loading ? "pointer-events-none opacity-30 " : ""} text-slate-600`}
+            />
           </button>
         </div>
       </div>
