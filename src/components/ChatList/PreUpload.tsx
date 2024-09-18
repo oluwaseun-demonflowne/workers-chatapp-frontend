@@ -24,7 +24,7 @@ const PreUpload = ({ arrayImages, setArrayImages }: Props) => {
             className="absolute cursor-pointer right-1 top-1"
           />
           <Image
-            className="bg-black w-10 h-10 shadow-md rounded-md"
+            className="bg-black w-16 h-16 shadow-md rounded-md"
             unoptimized={true}
             placeholder="blur"
             blurDataURL={`data:image/svg+xml;base64,${toBase64(
