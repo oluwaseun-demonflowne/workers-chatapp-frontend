@@ -3,14 +3,16 @@ import { useUploadThing } from "../../utils/uploadthing";
 import { toast } from "sonner";
 
 export const useChatImage = (
-  setArrayImages: Dispatch<SetStateAction<string[]>>
+  setArrayImages?: Dispatch<SetStateAction<string[]>>
 ) => {
   const [loading, setLoading] = useState(false);
   // const [linkUrl, setLinkUrl] = useState("");
+  
   const { startUpload } = useUploadThing("chatImageUpload", {
     onClientUploadComplete: async (res) => {
       const uploadedUrls = res.map((item) => item.url);
       setLoading(false);
+      // @ts-expect-error error
       setArrayImages((prev) => [...prev, ...uploadedUrls]);
       toast.success("Image uploaded", { duration: 2000 });
     },

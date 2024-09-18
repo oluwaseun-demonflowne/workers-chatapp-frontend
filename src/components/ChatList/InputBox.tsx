@@ -15,7 +15,7 @@ const InputBox = () => {
   const [displayEmoji, _setDisplayEmoji] = useState<string>(emojis[0]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [arrayImages, setArrayImages] = useState<string[]>([]);
-  const { loading } = useChatImage(setArrayImages);
+  const { loading } = useChatImage();
   const { email, senderEmail } = useEmailState();
   const { getOnlineUsers } = useSocketStateZustand();
   // const [loading, setLoading] = useState(false);
