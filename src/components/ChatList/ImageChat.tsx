@@ -36,7 +36,7 @@ const ImageChat = ({ setArrayImages }: Props) => {
           }
           toastson.loading("Images are being prepared");
           await startUpload(Array.from(file));
-          toast.dismiss();
+          toastson.dismiss();
         }}
       />
       {!loading && (

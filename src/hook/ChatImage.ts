@@ -7,7 +7,6 @@ export const useChatImage = (
 ) => {
   const [loading, setLoading] = useState(false);
   // const [linkUrl, setLinkUrl] = useState("");
-  
   const { startUpload } = useUploadThing("chatImageUpload", {
     onClientUploadComplete: async (res) => {
       const uploadedUrls = res.map((item) => item.url);
@@ -24,7 +23,7 @@ export const useChatImage = (
     }
   });
 
-  toast.dismiss();
+  // toast.dismiss();
 
   return {
     loading,
