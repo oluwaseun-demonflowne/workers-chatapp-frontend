@@ -26,10 +26,6 @@ const ListEmail = ({ list, openSearch, setOpenSearch }: Props) => {
   // const [getOnlineUsers, setGetOnlineUsers] = useState<Online[]>([]);
   const { setEmail, senderEmail } = useEmailState();
 
-  console.log(
-    getOnlineUsers[getOnlineUsers.length - 1]?.personWhoIamTypingTo,
-    senderEmail
-  );
 
   useEffect(() => {
     socket?.on("get-users", (user: Online[]) => {

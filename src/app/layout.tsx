@@ -6,6 +6,7 @@ import { TheProviders } from "@/providers/Theme";
 import ThemeSwitch from "@/providers/ThemeSwitch";
 import { AuthContextProvider } from "@/providers/ClientAuth";
 import { Toaster } from "sonner";
+import { getSession } from "@/lib/cookies";
 
 const inter = Oxanium({ subsets: ["latin"] });
 
@@ -22,16 +23,17 @@ export const metadata: Metadata = {
   }
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const know:string | null | undefined = await getSession()
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <SocketProvider>
-          <AuthContextProvider>
+          <AuthContextProvider emails={know}>
             <TheProviders>
               <ThemeSwitch />
               <Toaster visibleToasts={1} />

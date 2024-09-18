@@ -3,13 +3,14 @@ import type { NextRequest } from "next/server";
 import { cookies } from "next/headers";
 import { jwtVerify, type JWTVerifyResult } from "jose";
 
-type payloadType = {
+export type payloadType = {
   email: number;
   iat: number;
   exp: number;
 };
 
 export async function middleware(request: NextRequest) {
+  console.log("haha")
   if (request.nextUrl.pathname.startsWith("/dm")) {
     const cookieStore = cookies();
     const token = cookieStore.get("chat-auth");
