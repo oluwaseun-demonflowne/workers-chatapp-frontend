@@ -1,7 +1,6 @@
 import { type payloadType } from "@/middleware";
 import { jwtVerify, type JWTVerifyResult } from "jose";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 
 export async function getSession() {
   const session = cookies().get("chat-auth")?.value;
@@ -18,6 +17,6 @@ export async function VerifyToken(value: string) {
     if (payload.payload.email)
       return payload.payload.email as unknown as string;
   } catch (error) {
-    return redirect("/login");
+    // return redirect("/login");
   }
 }
