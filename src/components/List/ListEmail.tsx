@@ -16,6 +16,7 @@ export type Online = {
   email: string;
   socketId: string;
   typing: boolean;
+  personWhoIamTypingTo: string;
 };
 
 const ListEmail = ({ list, openSearch, setOpenSearch }: Props) => {
@@ -23,7 +24,12 @@ const ListEmail = ({ list, openSearch, setOpenSearch }: Props) => {
   // const [getOnlineUsers, setGetOnlineUsers] = useState<Online[]>([]);
   const { getOnlineUsers, setGetOnlineUsers } = useSocketStateZustand();
   // const [getOnlineUsers, setGetOnlineUsers] = useState<Online[]>([]);
-  const { setEmail, senderEmail} = useEmailState();
+  const { setEmail, senderEmail } = useEmailState();
+
+  console.log(
+    getOnlineUsers[getOnlineUsers.length - 1]?.personWhoIamTypingTo,
+    senderEmail
+  );
 
   useEffect(() => {
     socket?.on("get-users", (user: Online[]) => {
@@ -144,9 +150,11 @@ const ListEmail = ({ list, openSearch, setOpenSearch }: Props) => {
               <div className="text-[14px] text-slate-500 font-bold">
                 {getOnlineUsers.some(
                   (onlineUser) =>
-                    onlineUser.email === i.email && onlineUser.typing === true
+                    onlineUser.email === i.email &&
+                    onlineUser.typing === true &&
+                    onlineUser.personWhoIamTypingTo === senderEmail
                 ) ? (
-                  <span key={index} className="animate-ping italic">
+                  <span key={index} className={`animate-ping italic`}>
                     typing...
                   </span>
                 ) : i.status === "read" ? (

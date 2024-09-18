@@ -66,7 +66,7 @@ const InputBox = () => {
   useEffect(() => {
     let activityTimer: NodeJS.Timeout;
     const handleTyping = () => {
-      socket?.emit("typing", senderEmail);
+      socket?.emit("typing", { senderEmail, email });
       clearTimeout(activityTimer);
       activityTimer = setTimeout(() => {
         socket?.emit("stop-typing", senderEmail);
