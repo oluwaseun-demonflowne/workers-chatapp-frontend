@@ -6,7 +6,7 @@ const f = createUploadthing();
 // const auth = (req: Request) => ({ id: "fakeId" });
 
 export const ourFileRouter = {
-  chatImageUpload: f({ image: { maxFileSize: "4MB", maxFileCount: 4 } })
+  chatImageUpload: f({ image: { maxFileSize: "32MB", maxFileCount: 4 } })
     // .middleware(async ({ req }) => {
     //   const user = await auth(req);
 
@@ -16,8 +16,7 @@ export const ourFileRouter = {
     // })
     .onUploadComplete(async ({ file }) => {
       file;
-      //
-      //   return { uploadedBy: metadata.userId };
+      return;
     })
 } satisfies FileRouter;
 
