@@ -41,10 +41,10 @@ export async function middleware(request: NextRequest) {
       );
       return NextResponse.redirect(new URL(`/dm`, request.url));
     } catch (error) {
-      return;
+      return NextResponse.next();
     }
   }
-  return;
+  return NextResponse.next();
 }
 
 // export const config = {

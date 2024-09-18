@@ -16,7 +16,7 @@ export const POST = async (req: Request, _res: Response) => {
     },
     process.env.ACCESS_TOKEN!,
     {
-      expiresIn: "2h"
+      expiresIn: 24 * 60 * 60 * 1000
     }
   );
   const authHeader = req.headers;
@@ -52,7 +52,7 @@ export const POST = async (req: Request, _res: Response) => {
         // httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         sameSite: "strict",
-        maxAge: 345600,
+        maxAge: 24 * 60 * 60 * 1000,
         path: "/"
       });
       return new Response(JSON.stringify("SIX_DIGIT_OTP"), {

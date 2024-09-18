@@ -17,6 +17,7 @@ export async function VerifyToken(value: string) {
     if (payload.payload.email)
       return payload.payload.email as unknown as string;
   } catch (error) {
+    return null;
     // return redirect("/login");
   }
 }
