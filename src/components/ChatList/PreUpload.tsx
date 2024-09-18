@@ -2,7 +2,7 @@ import Image from "next/image";
 import React, { type Dispatch, type SetStateAction } from "react";
 import { shimmer, toBase64 } from "../media/Shimmer";
 import { MdCancel } from "react-icons/md";
-import { utapi } from "@/server/uploadthing";
+// import { utapi } from "@/server/uploadthing";
 
 type Props = {
   arrayImages: string[];
@@ -21,7 +21,7 @@ const PreUpload = ({ arrayImages, setArrayImages }: Props) => {
           <MdCancel
             onClick={async () => {
               deleteImage(i);
-              await utapi.deleteFiles(i);
+              // await utapi.deleteFiles(i);
             }}
             className="absolute cursor-pointer right-1 top-1"
           />
