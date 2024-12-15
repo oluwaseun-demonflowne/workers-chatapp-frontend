@@ -5,6 +5,7 @@ export type ListName = {
   senderEmail: string;
 };
 
+
 export type ListNameType = {
   [email: string]: {
     message: string;
