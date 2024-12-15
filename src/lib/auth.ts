@@ -28,12 +28,12 @@ export const {
     signIn: "/login"
   },
   callbacks: {
-    async signIn({ account, user }) {
-      if (account?.provider === "credentials") {
-        return !!user.email;
-      }
-      return true;
-    },
+    // async signIn({ account, user }) {
+    //   if (account?.provider === "credentials") {
+    //     return !!user.email;
+    //   }
+    //   return true;
+    // },
     session: async ({ session, token }) => {
       return {
         ...session,
