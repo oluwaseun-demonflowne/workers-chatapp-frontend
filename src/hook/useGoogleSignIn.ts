@@ -10,6 +10,7 @@ export const useHandleGoogleSignIn =  (chatter: string) => {
   const { setGetOnlineUsers } = useSocketStateZustand();
   const { setSenderEmail } = useEmailState();
   const signInWithGoogle = async () => {
+    
     try {
       // Attempt Google sign-in
       const GoogeSignInresult = await signIn("google", {
