@@ -30,15 +30,15 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <SessionProvider>
-          <SocketProvider>
-            <TheProviders>
+        <TheProviders>
+          <SessionProvider>
+            <SocketProvider>
               <ThemeSwitch />
               <Toaster visibleToasts={1} />
               {children}
-            </TheProviders>
-          </SocketProvider>
-        </SessionProvider>
+            </SocketProvider>
+          </SessionProvider>
+        </TheProviders>
       </body>
     </html>
   );
