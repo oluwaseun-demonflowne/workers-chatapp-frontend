@@ -40,7 +40,7 @@ const VerifyEmail = ({
     <motion.div
       className={`top-0 ${
         openVerifyModel ? "z-10 " : "z-[-4] opacity-0"
-      }  right-0 flex justify-center h-screen w-[100%] absolute`}>
+      }  right-0 px-4 md:px-0 flex justify-center h-screen w-[100%] absolute`}>
       <motion.div
         animate={openVerifyModel ? "open" : "closed"}
         variants={mobileVariants}
@@ -67,7 +67,7 @@ const VerifyEmail = ({
                 }}
                 pattern={REGEXP_ONLY_DIGITS}
                 maxLength={6}>
-                <InputOTPGroup className="flex gap-3 text-2xl">
+                <InputOTPGroup className="flex gap-2 text-2xl">
                   <InputOTPSlot className="h-12 w-12" index={0} />
                   <InputOTPSlot className="h-12 w-12" index={1} />
                   <InputOTPSlot className="h-12 w-12" index={2} />
