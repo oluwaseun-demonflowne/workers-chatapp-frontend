@@ -24,9 +24,9 @@ export const {
       authorize: validateCredentials
     })
   ],
-  pages: {
-    signIn: "/login"
-  },
+  // pages: {
+  //   signIn: "/login"
+  // },
   callbacks: {
     // async signIn({ account, user }) {
     //   if (account?.provider === "credentials") {
