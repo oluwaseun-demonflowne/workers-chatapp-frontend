@@ -59,7 +59,7 @@ const VerifyEmail = ({
             <span className="semibold">{chatter} Enter the code below</span>
           </p>
           <div>
-            <div className="flex justify-center">
+            <div className="flex mt-4 justify-center">
               <InputOTP
                 value={value}
                 onChange={(value) => {
@@ -67,13 +67,13 @@ const VerifyEmail = ({
                 }}
                 pattern={REGEXP_ONLY_DIGITS}
                 maxLength={6}>
-                <InputOTPGroup>
-                  <InputOTPSlot index={0} />
-                  <InputOTPSlot index={1} />
-                  <InputOTPSlot index={2} />
-                  <InputOTPSlot index={3} />
-                  <InputOTPSlot index={4} />
-                  <InputOTPSlot index={5} />
+                <InputOTPGroup className="flex gap-3 text-2xl">
+                  <InputOTPSlot className="h-14 w-14" index={0} />
+                  <InputOTPSlot className="h-14 w-14" index={1} />
+                  <InputOTPSlot className="h-14 w-14" index={2} />
+                  <InputOTPSlot className="h-14 w-14" index={3} />
+                  <InputOTPSlot className="h-14 w-14" index={4} />
+                  <InputOTPSlot className="h-14 w-14" index={5} />
                 </InputOTPGroup>
               </InputOTP>
               <p className="text-[14px] text-red-700">
