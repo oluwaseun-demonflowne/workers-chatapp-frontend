@@ -29,19 +29,19 @@ export const {
   //   signIn: "/login"
   // },
   callbacks: {
-    async signIn({ account, profile }) {
-      console.log("Production SignIn:", {
-        account,
-        profile,
-        emailVerified: profile?.email_verified
-      });
+    // async signIn({ account, profile }) {
+    //   console.log("Production SignIn:", {
+    //     account,
+    //     profile,
+    //     emailVerified: profile?.email_verified
+    //   });
 
-      // Strict Google verification
-      if (account?.provider === "google") {
-        return profile?.email_verified === true;
-      }
-      return true;
-    },
+    //   // Strict Google verification
+    //   if (account?.provider === "google") {
+    //     return profile?.email_verified === true;
+    //   }
+    //   return true;
+    // },
 
     session: async ({ session, token }) => {
       return {
