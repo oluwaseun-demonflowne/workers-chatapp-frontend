@@ -24,18 +24,25 @@ export const {
       authorize: validateCredentials
     })
   ],
-  session:{strategy:"jwt"},
+  session: { strategy: "jwt" },
   // pages: {
   //   signIn: "/login"
   // },
   callbacks: {
-    // async signIn({ account, user }) {
-    //   if (account?.provider === "credentials") {
-    //     return !!user.email;
-    //   }
-    //   return true;
-    // },
-    
+    async signIn({ account, profile }) {
+      console.log("Production SignIn:", {
+        account,
+        profile,
+        emailVerified: profile?.email_verified
+      });
+
+      // Strict Google verification
+      if (account?.provider === "google") {
+        return profile?.email_verified === true;
+      }
+      return true;
+    },
+
     session: async ({ session, token }) => {
       return {
         ...session,
@@ -62,6 +69,5 @@ export const {
       return token;
     }
   },
-  secret: process.env.NEXTAUTH_SECRET,
-  
+  secret: process.env.NEXTAUTH_SECRET
 });
