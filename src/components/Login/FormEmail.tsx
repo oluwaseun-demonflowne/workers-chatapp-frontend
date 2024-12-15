@@ -1,8 +1,10 @@
 import { getCode } from "@/fetch/GetCode";
+import { useHandleGoogleSignIn } from "@/hook/useGoogleSignIn";
 // import { useSocket } from "@/providers/Socket";
 // import { useEmailState, useSocketStateZustand } from "@/store";
 // import { useRouter } from "next/navigation";
 import React, { type Dispatch, type SetStateAction, useState } from "react";
+import { FcGoogle } from "react-icons/fc";
 
 // import { Online } from "../List/ListEmail";
 
@@ -20,6 +22,7 @@ const FormEmail = ({
   chatter
 }: Props) => {
   const [loading, setLoading] = useState(false);
+  const { signInWithGoogle } = useHandleGoogleSignIn(chatter);
   // const { setSenderEmail } = useEmailState();
   // const { push } = useRouter();
 
@@ -55,7 +58,7 @@ const FormEmail = ({
         setLoading(false);
       }}>
       <div className="flex flex-col gap-6 px-4 md:px-24 mt-20 text-center items-center h-[300px]">
-        <h1 className="text-2xl dark:text-[#007aff] font-bold text-slate-500">
+        <h1 className="text-2xl text-[#007aff] font-bold ">
           Sign in to Message your Family & Friends
         </h1>
         <p className="text-[15px] md:text-[13px] mt-[-10px] font-light text-slate-500 dark:text-[#d7dadc]">
@@ -73,6 +76,25 @@ const FormEmail = ({
           className="bg-[#e3dfdf] text-slate-600 rounded-md  border dark:border-slate-400 p-2 text-lg dark:bg-slate-600 dark:text-[#d7dadc] w-72 outline-none "
           type="email"
         />
+        <button
+          type="button"
+          onClick={async () => {
+            await signInWithGoogle();
+          }}
+          className="border px-6 h-12 rounded-md opacity-70 hover:opacity-100 flex gap-1 items-center ">
+          <FcGoogle className="text-2xl" />
+          Login with google
+          {/* if (response.status === 200) {
+                socket?.emit("new-online", chatter);
+                // setSenderEmail(chatter);
+                setSenderEmail(chatter);
+                socket &&
+                  socket?.on("get-users", (user: Online[]) => {
+                    setGetOnlineUsers(user);
+                  });
+                push("/dm");
+              } */}
+        </button>
       </div>
       <div className="bg-[#e3dfdf] dark:bg-[#202020]  border-t dark:border-slate-600 border-slate-300 flex justify-end px-4 py-3 md:py-5 md:px-5">
         <button

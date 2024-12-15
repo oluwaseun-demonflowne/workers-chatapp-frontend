@@ -6,12 +6,14 @@ import InputBox from "@/components/ChatList/InputBox";
 import { useSocket } from "@/providers/Socket";
 import { useChat, useEmailState } from "@/store";
 import { type Data } from "@/types/chatType";
+import { useSession } from "next-auth/react";
 import React, { type FC, useEffect } from "react";
 
 const Chat: FC<Record<string, never>> = () => {
-  const { email, senderEmail, setEmail } = useEmailState((state) => state);
+  const { email, setEmail } = useEmailState((state) => state);
   const { chats, setChats, filteredChat, resetChat, tempChat } = useChat();
   const { socket } = useSocket();
+  const { data: session } = useSession();
 
   useEffect(() => {
     socket?.on("sentMessageFromServer", (data: Data) => {
@@ -64,7 +66,7 @@ const Chat: FC<Record<string, never>> = () => {
           <WhoWeText email={email} />
           <ChatGanGan
             chats={tempChat}
-            senderEmail={senderEmail}
+            senderEmail={session!.user!.email!}
             email={email}
           />
           <InputBox />

@@ -4,9 +4,8 @@ import "./globals.css";
 import { SocketProvider } from "@/providers/Socket";
 import { TheProviders } from "@/providers/Theme";
 import ThemeSwitch from "@/providers/ThemeSwitch";
-import { AuthContextProvider } from "@/providers/ClientAuth";
 import { Toaster } from "sonner";
-import { getSession } from "@/lib/cookies";
+import { SessionProvider } from "next-auth/react";
 
 const inter = Oxanium({ subsets: ["latin"] });
 
@@ -28,19 +27,18 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const know:string | null | undefined = await getSession()
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <SocketProvider>
-          <AuthContextProvider emails={know}>
+        <SessionProvider>
+          <SocketProvider>
             <TheProviders>
               <ThemeSwitch />
               <Toaster visibleToasts={1} />
               {children}
             </TheProviders>
-          </AuthContextProvider>
-        </SocketProvider>
+          </SocketProvider>
+        </SessionProvider>
       </body>
     </html>
   );

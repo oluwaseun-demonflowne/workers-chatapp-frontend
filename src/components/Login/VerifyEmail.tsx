@@ -1,17 +1,14 @@
 import { getCode } from "@/fetch/GetCode";
-import { useSocket } from "@/providers/Socket";
-import { useEmailState, useSocketStateZustand } from "@/store";
 import { motion } from "framer-motion";
-import { useRouter } from "next/navigation";
-import React, {
-  type Dispatch,
-  type SetStateAction,
-  useRef,
-  useState
-} from "react";
+import React, { type Dispatch, type SetStateAction } from "react";
 import { AiOutlineRedo } from "react-icons/ai";
-import { type Online } from "../List/ListEmail";
-
+import { useVerifyToken } from "@/hook/useVerifyToken";
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSlot
+} from "@/components/ui/input-otp";
+import { REGEXP_ONLY_DIGITS } from "input-otp";
 type Props = {
   openVerifyModel: boolean;
   chatter: string;
@@ -37,38 +34,8 @@ const VerifyEmail = ({
   chatter,
   setOpenVerifyModel
 }: Props) => {
-  const { push } = useRouter();
-  const { socket } = useSocket();
-  const { setGetOnlineUsers } = useSocketStateZustand();
-  const { setSenderEmail } = useEmailState();
-  const [codes, setCodes] = useState(["", "", "", "", "", ""]);
-  const [error, setError] = useState({ error: false, errorMsg: "" });
-  const [loading, setLoading] = useState(false);
-  const [disableInput, setDisableInput] = useState(false);
-  const refs = useRef<HTMLInputElement[]>([]);
-  const handleChangeText = (text: string, index: number) => {
-    // Ensure only numeric characters are entered
-    if (/^\d+$/.test(text) || text === "") {
-      const newCodes = [...codes];
-      newCodes[index] = text;
-      setCodes(newCodes);
-
-      // Move focus to the next input
-      if (text !== "" && index < codes.length - 1) {
-        refs.current[index + 1].focus();
-      }
-    }
-  };
-
-  const handleKeyPress = (
-    e: React.KeyboardEvent<HTMLInputElement>,
-    index: number
-  ) => {
-    // If the backspace key is pressed and the input is empty, move focus to the previous input
-    if (e.key === "Backspace" && codes[index] === "" && index > 0) {
-      refs.current[index - 1].focus();
-    }
-  };
+  const { login, value, setValue, loading, setLoading, error } =
+    useVerifyToken(chatter);
   return (
     <motion.div
       className={`top-0 ${
@@ -81,53 +48,7 @@ const VerifyEmail = ({
         <form
           onSubmit={async (e) => {
             e.preventDefault();
-            setLoading(true);
-            try {
-              const response = await fetch("/api/VerifyToken", {
-                method: "POST",
-                body: JSON.stringify({
-                  email: chatter
-                }),
-                headers: { otpToken: codes.join("") }
-              });
-              if (response.status === 200) {
-                socket?.emit("new-online", chatter);
-                // setSenderEmail(chatter);
-                setSenderEmail(chatter);
-                socket &&
-                  socket?.on("get-users", (user: Online[]) => {
-                    setGetOnlineUsers(user);
-                  });
-                push("/dm");
-              }
-              if (response.status === 500) {
-                setLoading(false);
-                setCodes(["", "", "", "", "", ""]);
-              }
-              if (response.status === 401) {
-                // incorrect key , please retry
-                setError({
-                  error: true,
-                  errorMsg: "incorrect key , please retry"
-                });
-                setCodes(["", "", "", "", "", ""]);
-                setLoading(false);
-              }
-              if (response.status === 402) {
-                setError({
-                  error: true,
-                  errorMsg: "Token expired, please request new token"
-                });
-                setDisableInput(false);
-                setLoading(false);
-                setCodes(["", "", "", "", "", ""]);
-              }
-
-              // setOpenVerifyModal(true);
-            } catch (error) {
-              setLoading(false);
-              setCodes(["", "", "", "", "", ""]);
-            }
+            login();
           }}
           className="mt-6 ">
           <p className="text-[22px] dark:text-[#d7dadc] text-gray-600 font-medium">
@@ -138,30 +59,23 @@ const VerifyEmail = ({
             <span className="semibold">{chatter} Enter the code below</span>
           </p>
           <div>
-            <div>
-              <div className="flex gap-1 flex-row mt-5 justify-center items-center">
-                {codes.map((code, index) => (
-                  <input
-                    required
-                    className={`text-sm ${
-                      disableInput ? "pointer-events-none opacity-20" : ""
-                    } rounded-md dark:bg-slate-600 dark:text-[#d7dadc] outline-[#007aff] w-8 border text-lg h-8 p-2 border-slate-400 dark:border-slate-400 `}
-                    key={index}
-                    // @ts-expect-error skill issues ejeh
-                    // damn
-                    ref={(input) => (refs.current[index] = input)}
-                    value={code}
-                    onChange={(e) => {
-                      handleChangeText(e.currentTarget.value, index);
-                    }}
-                    onKeyUp={(e) => {
-                      handleKeyPress(e, index);
-                    }}
-                    type="text"
-                    maxLength={1}
-                  />
-                ))}
-              </div>
+            <div className="flex justify-center">
+              <InputOTP
+                value={value}
+                onChange={(value) => {
+                  setValue(value);
+                }}
+                pattern={REGEXP_ONLY_DIGITS}
+                maxLength={6}>
+                <InputOTPGroup>
+                  <InputOTPSlot index={0} />
+                  <InputOTPSlot index={1} />
+                  <InputOTPSlot index={2} />
+                  <InputOTPSlot index={3} />
+                  <InputOTPSlot index={4} />
+                  <InputOTPSlot index={5} />
+                </InputOTPGroup>
+              </InputOTP>
               <p className="text-[14px] text-red-700">
                 {error.error ? error.errorMsg : ""}
               </p>
@@ -169,9 +83,9 @@ const VerifyEmail = ({
             <button
               type="button"
               onClick={async () => {
-                setDisableInput(true);
+                // setDisableInput(true);
                 await getCode(setLoading, chatter);
-                setDisableInput(false);
+                // setDisableInput(false);
                 setLoading(false);
               }}
               disabled={loading}

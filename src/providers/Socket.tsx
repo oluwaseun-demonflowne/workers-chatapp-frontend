@@ -1,6 +1,7 @@
 "use client";
 import { type Online } from "@/components/List/ListEmail";
-import { useEmailState, useSocketStateZustand } from "@/store";
+import { useSocketStateZustand } from "@/store";
+import { useSession } from "next-auth/react";
 import { createContext, useContext, useEffect, useState } from "react";
 import { type Socket, io } from "socket.io-client";
 
@@ -19,24 +20,24 @@ export const useSocket = () => {
 };
 
 export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
-  const { senderEmail } = useEmailState();
+  // const { senderEmail } = useEmailState();
   const [socket, setSocket] = useState<Socket | null>(null);
   const [isConnected, setIsConnected] = useState(false);
   const { setGetOnlineUsers } = useSocketStateZustand();
+  const { data: session } = useSession();
 
   useEffect(() => {
-    // https://workers-chatapp-backend.onrender.com/
-    const socket: Socket = io("https://workers-chatapp-backend.onrender.com");
+    const socket: Socket = io(process.env.NEXT_PUBLIC_BACKEND_URL!);
     // const socket: Socket = io("http://localhost:5001");
 
     socket.on("connect", () => {
       setIsConnected(true);
     });
 
-    if (senderEmail !== "") {
-      socket.emit("new-online", senderEmail);
+    if (!session?.user?.email) {
+      socket.emit("new-online", session?.user?.email);
 
-      socket.emit("get-users", senderEmail);
+      socket.emit("get-users", session?.user?.email);
     }
     socket?.on("get-users", (user: Online[]) => {
       setGetOnlineUsers(user);
@@ -56,7 +57,7 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
       socket?.disconnect();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [senderEmail]);
+  }, [session]);
 
   return (
     <SocketContext.Provider value={{ socket, isConnected }}>

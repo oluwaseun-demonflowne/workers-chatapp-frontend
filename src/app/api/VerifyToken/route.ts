@@ -1,4 +1,3 @@
-import { sign } from "jsonwebtoken";
 import { cookies } from "next/headers";
 import { jwtVerify } from "jose";
 
@@ -9,16 +8,6 @@ type payloadType = {
 };
 
 export const POST = async (req: Request, _res: Response) => {
-  const { email } = await req.json();
-  const accessToken = sign(
-    {
-      email: email
-    },
-    process.env.ACCESS_TOKEN!,
-    {
-      expiresIn: 24 * 60 * 60 * 1000
-    }
-  );
   const authHeader = req.headers;
   authHeader.get("otpToken");
   if (!authHeader)
@@ -48,14 +37,7 @@ export const POST = async (req: Request, _res: Response) => {
     if (
       payload.payload.OTP.toString() === authHeader.get("otpToken")?.toString()
     ) {
-      cookies().set("chat-auth", accessToken, {
-        // httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
-        maxAge: 24 * 60 * 60 * 1000,
-        path: "/"
-      });
-      return new Response(JSON.stringify("SIX_DIGIT_OTP"), {
+      return new Response(JSON.stringify("token verified"), {
         status: 200
       });
     }
