@@ -84,6 +84,6 @@ export const useVerifyToken = (chatter: string) => {
     setLoading,
     value,
     setValue,
-    error
+    error, setError
   };
 };

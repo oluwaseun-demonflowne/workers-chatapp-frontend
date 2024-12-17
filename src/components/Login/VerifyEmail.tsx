@@ -34,7 +34,7 @@ const VerifyEmail = ({
   chatter,
   setOpenVerifyModel
 }: Props) => {
-  const { login, value, setValue, loading, setLoading, error } =
+  const { login, value, setValue, loading, setLoading, error, setError } =
     useVerifyToken(chatter);
   return (
     <motion.div
@@ -59,7 +59,7 @@ const VerifyEmail = ({
             <span className="semibold">{chatter} Enter the code below</span>
           </p>
           <div>
-            <div className="flex mt-4 justify-center">
+            <div className="flex flex-col items-center mt-4 justify-center">
               <InputOTP
                 value={value}
                 onChange={(value) => {
@@ -83,6 +83,7 @@ const VerifyEmail = ({
             <button
               type="button"
               onClick={async () => {
+                setError({ error: false, errorMsg: "" });
                 // setDisableInput(true);
                 await getCode(setLoading, chatter);
                 // setDisableInput(false);
