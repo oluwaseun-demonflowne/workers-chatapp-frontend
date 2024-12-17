@@ -37,7 +37,6 @@ export const useVerifyToken = (chatter: string) => {
           redirect: false,
           email: chatter
         }).then(async (callback) => {
-          console.log(callback)
           if (callback?.url === null) {
             toast.error("Unknown error, Retry :(", {
               position: "top-center"
