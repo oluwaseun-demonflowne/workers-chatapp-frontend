@@ -58,7 +58,7 @@ export const {
       };
     },
     jwt: async ({ token, user }) => {
-      console.log(user)
+      console.log(user,token)
       if (user) {
         return {
           ...token,
