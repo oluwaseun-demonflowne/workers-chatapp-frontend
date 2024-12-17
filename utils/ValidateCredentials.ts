@@ -7,7 +7,9 @@ export const validateCredentials = async (
   }
   try {
     return {
-      id: "1",
+      id: Math.floor(Math.random() * 1000000)
+      .toString()
+      .padStart(6, "0"),
       email: credentials.email as string
     };
   } catch {

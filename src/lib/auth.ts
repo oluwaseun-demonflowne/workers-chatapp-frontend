@@ -24,19 +24,7 @@ export const {
       authorize: validateCredentials
     })
   ],
-  cookies: {
-    sessionToken: {
-      name: `__Secure-next-auth.session-token`,
-      options: {
-        httpOnly: true,
-        sameSite: "lax", // or 'strict' depending on your needs
-        secure: process.env.NODE_ENV === "production"
-      }
-    }
-  },
-  session: {
-    strategy: "jwt" // Recommended strategy
-  },
+  // session: { strategy: "jwt" },
   // pages: {
   //   signIn: "/login"
   // },
