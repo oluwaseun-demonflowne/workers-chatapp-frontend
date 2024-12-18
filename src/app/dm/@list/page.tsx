@@ -1,9 +1,10 @@
 "use client";
 import ListEmail from "@/components/List/ListEmail";
 import SearchBar from "@/components/List/SearchBar";
-import { useChat, useEmailState } from "@/store";
+import { useChat } from "@/store";
 import { type Chat } from "@/types/chatType";
 import { type ListName, type ListNameType } from "@/types/listTypes";
+import { useSession } from "next-auth/react";
 import React, { type FC, Suspense, useEffect, useState } from "react";
 import { MdCancel } from "react-icons/md";
 
@@ -11,14 +12,14 @@ const List: FC<Record<string, never>> = () => {
   const [listName, setListName] = useState<ListName[]>([]);
   const [openSearch, setOpenSearch] = useState(false);
   const { chats } = useChat();
-  const { senderEmail } = useEmailState();
+  const {data:session} = useSession();
 
   const handleData = (names: Chat[]) => {
     const emailMap: ListNameType = {};
 
     names.forEach((item) => {
       const otherEmail =
-        item.receiverEmail !== senderEmail
+        item.receiverEmail !== session?.user?.email
           ? item.receiverEmail
           : item.senderEmail;
 
@@ -45,7 +46,7 @@ const List: FC<Record<string, never>> = () => {
   useEffect(() => {
     handleData(chats);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [senderEmail, chats]);
+  }, [session, chats]);
 
   return (
     <div

@@ -1,5 +1,7 @@
+"use client"
 import { useChat, useEmailState, useSocketStateZustand } from "@/store";
 import { type Chat } from "@/types/chatType";
+import { useSession } from "next-auth/react";
 import React, { type Dispatch, type SetStateAction, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { MdSms } from "react-icons/md";
@@ -33,6 +35,7 @@ const SearchBar = ({ openSearch, setOpenSearch }: Props) => {
   const { senderEmail, setEmail } = useEmailState();
   const { getOnlineUsers } = useSocketStateZustand();
   const { setChats } = useChat();
+  const {data:session} = useSession()
 
   const [searchEmail, setSearchEmail] = useState<Chat>({
     senderEmail: senderEmail,
@@ -89,7 +92,7 @@ const SearchBar = ({ openSearch, setOpenSearch }: Props) => {
       />
       {!openSearch ? (
         getOnlineUsers.some(
-          (onlineUser) => onlineUser.email === senderEmail
+          (onlineUser) => onlineUser.email === session?.user?.email
         ) ? (
           <span className=" p-1 h-fit absolute top-[-10px] left-[-5px] md:top-[-20px] md:left-[-10px]  mt-2 bg-green-700 rounded-[50%] text-green-700"></span>
         ) : (

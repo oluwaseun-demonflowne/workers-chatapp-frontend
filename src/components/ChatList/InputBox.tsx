@@ -9,6 +9,7 @@ import PreUpload from "./PreUpload";
 import { emojis } from "@/templates/emoji";
 import { toast } from "sonner";
 import { useChatImage } from "@/hook/ChatImage";
+import { useSession } from "next-auth/react";
 
 const InputBox = () => {
   const [text, setText] = useState("");
@@ -16,8 +17,9 @@ const InputBox = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [arrayImages, setArrayImages] = useState<string[]>([]);
   const { loading } = useChatImage();
-  const { email, senderEmail } = useEmailState();
+  const { email } = useEmailState();
   const { getOnlineUsers } = useSocketStateZustand();
+  const { data: session } = useSession();
   // const [loading, setLoading] = useState(false);
   const { socket } = useSocket();
   const emojiStarterRef = useRef<HTMLButtonElement | null>(null);
@@ -38,7 +40,10 @@ const InputBox = () => {
             toast.loading("Email sending");
             try {
               await fetch("/api/onlineEmail", {
-                body: JSON.stringify({ email: email, senderEmail }),
+                body: JSON.stringify({
+                  email: email,
+                  senderEmail: session?.user?.email
+                }),
                 method: "POST"
               });
               toast.success("Email sent", { duration: 2000 });
@@ -54,7 +59,7 @@ const InputBox = () => {
     socket?.emit("sentMessage", {
       chatId: Math.floor(Math.random() * 1000000),
       message: text,
-      senderEmail: senderEmail,
+      senderEmail: session?.user?.email,
       receiverEmail: email,
       image: arrayImages,
       status: "sent"
@@ -68,10 +73,10 @@ const InputBox = () => {
   useEffect(() => {
     let activityTimer: NodeJS.Timeout;
     const handleTyping = () => {
-      socket?.emit("typing", { senderEmail, email });
+      socket?.emit("typing", { senderEmail:session?.user?.email, email });
       clearTimeout(activityTimer);
       activityTimer = setTimeout(() => {
-        socket?.emit("stop-typing", senderEmail);
+        socket?.emit("stop-typing", session?.user?.email);
       }, 2000);
     };
 

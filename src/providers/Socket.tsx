@@ -27,18 +27,23 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
   const { data: session } = useSession();
 
   useEffect(() => {
+    if (!session) return;
     const socket: Socket = io("https://workers-chatapp-backend.onrender.com");
+    // console.log("hiii");
     // const socket: Socket = io("http://localhost:5001");
+
+    // console.log(socket);
 
     socket.on("connect", () => {
       setIsConnected(true);
     });
 
-    if (!session?.user?.email) {
-      socket.emit("new-online", session?.user?.email);
+    // if (!session!.user!.email) {
 
-      socket.emit("get-users", session?.user?.email);
-    }
+    socket.emit("new-online", session?.user?.email);
+
+    socket.emit("get-users", session?.user?.email);
+    // }
     socket?.on("get-users", (user: Online[]) => {
       setGetOnlineUsers(user);
     });
