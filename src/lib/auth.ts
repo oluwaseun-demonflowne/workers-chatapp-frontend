@@ -30,11 +30,6 @@ export const {
   // },
   callbacks: {
     async signIn({ account, profile }) {
-      console.log("Production SignIn:", {
-        account,
-        profile,
-        emailVerified: profile?.email_verified
-      });
 
       // Strict Google verification
       if (account?.provider === "google") {
