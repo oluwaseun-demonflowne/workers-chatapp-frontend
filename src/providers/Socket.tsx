@@ -27,8 +27,7 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
   const { data: session } = useSession();
 
   useEffect(() => {
-    
-    const socket: Socket = io(process.env.NEXT_PUBLIC_BACKEND_URL!);
+    const socket: Socket = io("https://workers-chatapp-backend.onrender.com");
     // const socket: Socket = io("http://localhost:5001");
 
     socket.on("connect", () => {
