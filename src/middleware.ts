@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { getToken } from "next-auth/jwt";
+import { auth } from "@/lib/auth";
 
 export type payloadType = {
   email: number;
@@ -9,13 +9,12 @@ export type payloadType = {
 };
 
 export async function middleware(req: NextRequest) {
-  // @ts-expect-error i dunno an error
-  const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
-  if (!token && req.nextUrl.pathname == "/dm") {
+  const session = await auth();
+  if (!session && req.nextUrl.pathname == "/dm") {
     const redirectUrl = new URL(`/login`, req.url);
     return NextResponse.redirect(redirectUrl);
   }
-  if (token && req.nextUrl.pathname == "/login") {
+  if (session && req.nextUrl.pathname == "/login") {
     const redirectUrl = new URL(`/dm`, req.url);
     return NextResponse.redirect(redirectUrl);
   }
