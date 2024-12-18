@@ -7,7 +7,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 
 export const useVerifyToken = (chatter: string) => {
-  const { replace} = useRouter();
+  const { replace } = useRouter();
   const { socket } = useSocket();
   const { setGetOnlineUsers } = useSocketStateZustand();
   const { setSenderEmail } = useEmailState();
@@ -35,17 +35,18 @@ export const useVerifyToken = (chatter: string) => {
           });
         await signIn("credentials", {
           redirect: false,
-          email: chatter
+          email: chatter,
+          callbackUrl: "/dm"
         }).then(async (callback) => {
           if (callback?.url === null) {
             toast.error("Unknown error, Retry :(", {
               position: "top-center"
             });
-            setLoading(false);
+            console.log("loading");
+            // setLoading(false);
             return;
           }
           if (callback?.error === null) {
-            
             replace("/dm");
           }
         });
@@ -85,6 +86,7 @@ export const useVerifyToken = (chatter: string) => {
     setLoading,
     value,
     setValue,
-    error, setError
+    error,
+    setError
   };
 };

@@ -44,7 +44,6 @@ export const {
     },
 
     session: async ({ session, token }) => {
-      console.log(session)
       return {
         ...session,
         user: {
@@ -58,7 +57,6 @@ export const {
       };
     },
     jwt: async ({ token, user }) => {
-      console.log(user,token)
       if (user) {
         return {
           ...token,
